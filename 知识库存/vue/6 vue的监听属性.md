@@ -1,0 +1,39 @@
+## Vue.js 监听属性 watch
+通过 watch 来响应数据的变化
+
+千米与米之间的换算
+````
+<div id = "computed_props">
+    千米 : <input type = "text" v-model = "kilometers">
+    米 : <input type = "text" v-model = "meters">
+</div>
+<p id="info"></p>
+<script type = "text/javascript">
+    var vm = new Vue({
+    el: '#computed_props',
+    data: {
+        kilometers : 0,
+        meters:0
+    },
+    methods: {
+    },
+    computed :{
+    },
+    watch : {
+        kilometers:function(val) {
+            this.kilometers = val;
+            this.meters = this.kilometers * 1000
+        },
+        meters : function (val) {
+            this.kilometers = val/ 1000;
+            this.meters = val;
+        }
+    }
+    });
+    // $watch 是一个实例方法
+    vm.$watch('kilometers', function (newValue, oldValue) {
+    // 这个回调将在 vm.kilometers 改变后调用
+    document.getElementById ("info").innerHTML = "修改前值为: " + oldValue + "，修改后值为: " + newValue;
+})
+</script>
+````

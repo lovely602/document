@@ -1,0 +1,135 @@
+1.恢复库
+
+C:\Users\db2admin>db2 restore db LOCAL from e:\back\back  taken at 20170726154630 into LOCAL logtarget E:\logs
+SQL2539W  警告！正在复原至与备份映像数据库相同的现有数据库。数据库文件将被删除。
+
+
+想要继续吗？（y/n） y
+DB20000I  RESTORE DATABASE 命令成功完成。
+
+C:\Users\db2admin>db2 rollforward db LOCAL query status
+
+                                 前滚状态
+
+ 输入数据库别名                  = LOCAL
+ 节点数已返回状态                = 1
+
+ 节点号                          = 0
+ 前滚状态                        = 数据库暂挂
+ 下一个要读取的日志文件          = S0000902.LOG
+ 已处理的日志文件                =  -
+ 上次落实的事务                  = 2017-07-26-07.47.20.000000 UTC
+
+
+C:\Users\db2admin>db2 rollforward db LOCAL to end of logs overflow log path (E:\
+logs)
+
+                                 前滚状态
+
+ 输入数据库别名                  = LOCAL
+ 节点数已返回状态                = 1
+
+ 节点号                          = 0
+ 前滚状态                        = 数据库工作
+ 下一个要读取的日志文件          = S0000903.LOG
+ 已处理的日志文件                = S0000902.LOG - S0000903.LOG
+ 上次落实的事务                  = 2017-07-26-07.47.20.000000 UTC
+
+DB20000I  ROLLFORWARD 命令成功完成。
+
+
+C:\Users\db2admin>db2 rollforward db LOCAL query status
+
+                                 前滚状态
+
+ 输入数据库别名                  = LOCAL
+ 节点数已返回状态                = 1
+
+ 节点号                          = 0
+ 前滚状态                        = 数据库工作
+ 下一个要读取的日志文件          = S0000903.LOG
+ 已处理的日志文件                = S0000902.LOG - S0000903.LOG
+ 上次落实的事务                  = 2017-07-26-07.47.20.000000 UTC
+
+
+C:\Users\db2admin>db2 rollforward db LOCAL to end of logs overflow log path (E:\
+logs)
+
+                                 前滚状态
+
+ 输入数据库别名                  = LOCAL
+ 节点数已返回状态                = 1
+
+ 节点号                          = 0
+ 前滚状态                        = 数据库工作
+ 下一个要读取的日志文件          = S0000904.LOG
+ 已处理的日志文件                = S0000902.LOG - S0000903.LOG
+ 上次落实的事务                  = 2017-07-26-07.47.20.000000 UTC
+
+DB20000I  ROLLFORWARD 命令成功完成。
+
+C:\Users\db2admin>db2 rollforward db LOCAL to end of logs
+
+                                 前滚状态
+
+ 输入数据库别名                  = LOCAL
+ 节点数已返回状态                = 1
+
+ 节点号                          = 0
+ 前滚状态                        = 数据库工作
+ 下一个要读取的日志文件          = S0000904.LOG
+ 已处理的日志文件                = S0000902.LOG - S0000903.LOG
+ 上次落实的事务                  = 2017-07-26-07.47.20.000000 UTC
+
+DB20000I  ROLLFORWARD 命令成功完成。
+
+
+db2 => connect to LOCAL user db2inst using `123qwerasdf
+
+   数据库连接信息
+
+ 数据库服务器         = DB2/NT64 9.7.4
+ SQL 授权标识         = DB2INST
+ 本地数据库别名       = LOCAL
+
+db2 => select * from pmsysparam
+
+CODE VALUE
+                          DESCRIPTION
+
+
+
+---- ---------------------------------------------------------------------------
+------------------------- ------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+------------------------------------------
+0001 2017-06-01
+                          当前会计日期
+
+
+
+0002 2017-05-31
+                          上一会计日期
+
+
+
+0003 2017-06-02
+                          下一会计日期
+
+
+
+0004 0
+                          系统运行状态。可取值：0-正常/1-关闭/2-批处理。默认值为
+正常(0)
+
+
+0005 DB2
+                          数据库类型,DB2;Oracle;Sybase;Informix;MySQL
+
+
+
+
+  5 条记录已选择。
+
+

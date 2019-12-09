@@ -1,0 +1,35 @@
+1.maven项目里的继承？
+    有的需求场景可能存在多个工程，各个工程依赖的jar包有可能相同。此时为了方便可以创建maven父工程来统一管理jar包的版本。在子工程中声明依赖时不指定版本号，以父工程中的为准，同时也便于修改。
+    操作步骤如下所示：
+    ①：以pom打包方式创建父工程。
+    ②：在子工程中声明对父工程的引用。
+    ③：将子工程中与父工程中的坐标一致的内容删除。例如，groupId或者version属性。
+    ④：在父工程中统一对那个jar的版本依赖。例如：
+    <dependencyManagement>
+          <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.8</version>
+                <scope>test</scope>
+            </dependency>
+          </dependencies>
+      </dependencyManagement>
+      注意：dependencyManagement标签管理的依赖，其实父项目本身并没有真正依赖，它只是管理依赖的版本。负责提供给子依赖的版本管理。
+      ⑤：删除子项目中的依赖jar包版本号。
+      ⑥：父项目通过properties标签统一管理版本号。
+      说明：可以通过在properties中自定义标签，然后在标签中填写常量，这种方法不仅可以管理依赖的版本号，还可以管理编码方式。
+2.maven项目里的聚合？
+    在用maven管理项目时，通常为创建多个maven工程，也就是一个项目的多个模块，每一个maven工程负责一个业务方向。
+    解决方法为：创建一个聚合工程，将其他的各个模块，都由这个聚合工程来管理，只需要打包这个聚合模块就可以了。
+    操作步骤如下所示：
+    ①：创建聚合工程，注意该聚合工程的打包方式也必须为pom。
+    ②：创建子工程，此处选择maven module
+    ③：创建子工程，表现层，持久层等等。
+    ④：在聚合工程中添加子工程的引用。
+     <modules>
+        <module>controller</module>
+        <module>service</module>
+        <module>dao</module>
+     </modules>
+

@@ -1,0 +1,13 @@
+db2 restore db yuflcdb from "D:\shanghai" taken at 20161117132855  on D:\ dbpath on C: into CJLHXC
+
+db2 get db cfg for CJLHXC
+
+db2 rollforward db CJLHXC to end of logs and stop
+
+db2 update db cfg for CJLHXC  using LOGARCHMETH1  DISK:d:\archivelog\
+
+(LOGARCHMETH1)
+
+----检查备份完整性
+C:\Users\db2admin>db2ckbkp -h C:\20171102db2backup\LOCAL.0.DB2.NODE0000.CATN0000
+.20170930153652.001

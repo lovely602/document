@@ -1,0 +1,11 @@
+db2 restore db yuflcdb from "d:\backup\data" taken at 20161010121008  on D:\ dbpath on C:
+
+db2 rollforward db yuflcdb to end of logs and stop
+
+
+db2 rollforward db yuflcdb to 2016-10-10-12.10.08 using local time and stop
+
+db2 get db cfg for yuflcdb  查看 数据库的日志 所在地
+
+
+db2 restore db yuflcdb from "d:\backup\data" taken at 20161010121008  on D:\ dbpath on C: into CJLHDEV 

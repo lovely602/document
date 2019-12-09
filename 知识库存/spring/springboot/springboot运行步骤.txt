@@ -1,0 +1,21 @@
+springboot的运行步骤：
+  1.指定springboot的运行source；
+  2.判断是否是web环境webEnvironment；
+  3.获取META-INF/spring.factories文件内配置的所有ApplicationContextInitializer应用上下文初始化类,设置初始化类；
+  4.获取META-INF/spring.factories文件内配置的所有ApplicationListener应用监听类，设置监听类，用于接收广播事件；
+  5.判断是否是主应用类mainApplicationClass；
+  6.开启springboot中的任务执行时间监听器stopWatch；
+  7.设置系统配置java.awt.headless是否是缺少显示器，键盘或鼠标的系统配置。默认为true；
+  8.获取META-INF/spring.factories文件内配置的所有SpringApplicationRunListener监听，并启动这些监听，用于发布广播事件。
+  9.准备enviroment环境,获取或创建enviroment，并配置相关配置文件，判断是否是webEnvironment
+  10.打印横幅banner，使用banner.location可指定文本banner的位置，使用banner.image.location可指定图片banner的位置，横幅名称默认为banner.txt。
+  11.创建applicationContext上下文；
+  12.注册异常分析器；
+  13.为applicationContext加载environment,设置资源加载器，类加载器，之后逐个执行applicationContextInitializer的initialize方法，调用SpringApplicationRunListener的contextPrepared方法；打印日志；
+  14.刷新configurableApplicationContext,调用applicationContext的refresh方法。
+  15.遍历所有注册的ApplicationRunner和CommandLineRunner,并执行其run方法。
+  16.调用所有SpringApplicationRunListener的finished方法。广播springboot已完成applicationContext初始化的全部过程。
+  17.关闭任务执行时间监听器。
+  18.如果开启日志，则打印执行时间
+  19.调用异常分析器打印报告，调用所有的springApplicationRunListener的finished方法将异常信息发布出去。
+  20.若application.properties与application.yml配置文件同时存在，application.properties文件的配置后加载，application.properties中的属性会配置文件属性值会覆盖application.yml中的同名属性值。

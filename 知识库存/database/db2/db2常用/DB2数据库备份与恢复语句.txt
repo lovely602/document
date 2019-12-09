@@ -1,0 +1,30 @@
+1，备份数据库
+
+备份：
+db2 backup db yuflcdb to e:\backup\data
+
+2.恢复数据库
+
+db2 restore db yuflcdb from d:\cx  taken at  20151130000001  --通用恢复
+
+3.如果在恢复完成后，连接不上数据库 时执行以下命令
+再执行回滚
+db2  rollforward  db  yuflcdb  to end of  logs and stop
+
+
+
+
+具体操作步骤：
+
+0.先安装好DB2数据库。
+1.将导出的数据库文件 放到磁盘下 例如放到D盘下
+2.
+命令窗口连接db2
+db2cmd
+连接数据库
+  db2  connect to xzwz(数据库名称) user db2admin（用户名） using 密码;
+
+ 3. 恢复数据库
+ db2 restore db  xzwz(数据库名称) from d:\  taken at  20151130000001（备份的数据库名）  --通用恢复
+
+

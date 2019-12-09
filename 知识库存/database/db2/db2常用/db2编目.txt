@@ -1,0 +1,20 @@
+-- 编目远程服务
+db2 catalog tcpip node hbjz  remote 192.168.102.23 server 50000
+-- 编目数据库
+db2 catalog db hbjz at node hbjz
+--刷新高速缓存
+db2 terminate
+
+--删除结点编目
+db2 uncatalog node hbjz
+--删除数据库编目
+db2 uncatalog db hbjz
+--刷新高速缓存
+db2 terminate
+
+
+
+db2 catalog tcpip node JYJZ  remote 192.168.102.70 server 50000
+db2 catalog db JYJZ at node JYJZ
+
+

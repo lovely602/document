@@ -1,0 +1,50 @@
+github添加、删除远程仓库:
+
+git remote 不带参数时可以参看远程仓库名称
+
+git remote -v 可以查看远程仓库名称和网址
+
+git remote add  仓库名  仓库地址  添加远程仓库，同时设置远程仓库的名字，
+                 一般仓库名称是origin，当然你也可以写成其他的名字
+				 
+git remote rm  origin       删除名字为origin的远程仓库
+
+github添加、删除本地分支：
+
+git branch 用于管理分支
+
+git branch 可以查看本地仓库的分支情况
+
+git branch 分支名        创建分支
+
+git checkout 分支名      切换到特定分支
+
+git branch -d 分支名   删除某个分支
+
+git merge 分支名   合并某个分支到现在的所处的分支
+
+github添加、删除远程分支：
+
+git branch -r 可以查看远程仓库的分支情况
+
+git branch -a 可以查看所以分支的情况，即本地分支和远程分支
+
+git push <远程主机名>  <本地分支名>：<远程分支名> 远程分支的创建
+
+git push <远程主机名> --delete <删除分支名> 远程分支的删除
+
+git push origin master:develop  创建远程分支
+
+git push origin master   推送到master远程分支，分支名可改
+
+github更新与合并
+
+git pull  更新你的本地仓库至最新改动
+
+git merge  <branch>  合并其他分支到你的当前分支
+
+git add <filename>  提交文件
+
+git diff <source_branch>  <target_branch>  浏览分支间的差异
+
+

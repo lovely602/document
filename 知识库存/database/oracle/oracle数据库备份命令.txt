@@ -1,0 +1,51 @@
+国网国际导入数据库步骤：
+1、删除用户
+drop user zmkgPro4 cascade;
+2、创建用户
+create user zmkgPro4 default tablespace LBMS_TS identified by zmkgPro4;
+3、授权
+grant dba to zmkgPro4;
+4、导入数据库
+imp zmkgPro4/zmkgPro4@192.168.102.9/orcl   file=d:\zmkgdmpCeshi20190110.dmp full=y ignore=true log=e:\111.log
+
+imp zmkgPro4/zmkgPro4@192.168.102.9/orcl   file=d:\zmkgdmpCeshi20190110.dmp fromuser=(zmkgpro1) touser=(zmkgPro4) ignore=y;
+
+导入中煤科工数据库
+imp zmkgPro4/zmkgPro4@192.168.102.9/orcl   file=d:\zmkgdmpCeshi20190110.dmp full=y ignore=y log=e:\111.log
+
+管理员账号：shdt1029
+cmd
+sqlplus /nolog
+conn shdt1029/shdt1029@//192.168.102.9:1521/orcl
+
+
+导出数据库
+cmd
+exp ydzl0920/ydzl0920@192.168.102.45/orcl file=c://yd_data//ydzl20180615.dmp owner=ydzl0920
+
+
+
+
+
+1.首先,查询表空间存放路径:
+
+select name from V$datafile; --D:\ORACLE\PRODUCT\10.2.0\ORADATA\RESOURCE\xxxx.dbf
+
+2.创建:
+
+create tablespace LBMS_TS logging datafile 'D:\ORACLE\ORADATA\ORCL\ZMKG.DBF'
+size 1024m autoextend on next 50m maxsize unlimited extent management local segment space management auto;
+
+drop user zmkgbb cascade;
+
+create user zmkgbb default tablespace LBMS_TS identified by zmkgbb;
+
+3.授权
+grant dba to zmkg;
+
+4.导入
+导入:imp zmkgbb/zmkgbb@192.168.102.9/orcl file=d:\zmkg20180102.dmp full=y ignore=true  log=d:\zmkg20180102imp.log
+
+
+
+

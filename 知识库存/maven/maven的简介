@@ -1,0 +1,37 @@
+1.maven的用途?
+    maven主要是基于Java平台的项目构建，依赖管理和项目信息管理的一个工具。
+    项目构建包括清理，编译，测试到生成测试报告，再到打包及部署。
+    依赖管理是maven借助于坐标实现的。
+    maven是跨平台，可以在Windows，Linux和mas OX等系统中运行。
+2.maven的目录结构？
+  ① bin  : maven的运行脚本和命令。
+  ② boot ：包含plexus-classworlds-2.4jar。plexus-classworlds是一个类加载器框架，相当于Java默认类加载器，它提供了更丰富的语法以方便配置，maven使用该框架加载自己的类库。
+  ③ conf ：配置文件setting，修改该文件就可以在机器上全局地定制maven的行为。但一般情况下更倾向于复制该文件到~用户目录/.m2/目录下，然后修改该文件，在用户范围内定制maven的行为。
+  ④ lib  : 包含maven运行时所需要的Java类库，包括第三方的依赖类库。
+  ⑤ LICENSE.txt ：记录了maven使用该软件的许可证。
+  ⑥ NOTICE.txt ：记录了maven包含的第三方软件。
+  ⑦ README.txt ：记录了maven的简要介绍。
+3.maven的项目结构？
+  ① 项目骨架：项目根目录下的pom.xml文件。
+  ② 项目主代码：maven认为项目的主代码是位于src/main/java目录下的。所以通常我们会在此目录下创建文件。
+  ③ 资源文件：maven的资源文件位于src/main/resources目录下
+  ④ 测试文件：maven默认的测试代码目录是src/test/java
+3.什么是maven插件？
+    maven是一个执行插件的过程，每一个任务是实际上都是由插件来执行完成的，每个插件对应了一个或多个任务。
+4.如何配置编译插件？
+    一般就算创建工程制定了jdk的版本，但是在执行update project的操作时，一般maven工程会自动恢复到默认的jdk版本，可能是1.4，也可能是1.5，这主要与maven的版本有关。
+    为其制定jdk版本可使用如下配置信息：
+    <build>
+        <plugins>
+            <!-- 编译插件，指定 JDK 的版本为1.7 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>

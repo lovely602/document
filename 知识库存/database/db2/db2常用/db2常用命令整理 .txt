@@ -1,0 +1,32 @@
+db2常用命令整理
+连接数据库：db2 connect to 数据库名 user 用户名 using 密码
+启动实例：db2start
+停止实例：db2stop force (force表示强制停止实例)
+创建实例：db2icrt 实例名
+删除实例：db2idrop -f 实例名
+查询数据库的配置：db2 GET DB CFG FOR 数据库名称
+查询数据库的日志配置：db2 GET DB CFG FOR 数据库名称 参数
+
+设置数据库的主日志文件的数目：
+db2 update db cfg for 数据库名称using logprimary 10
+
+设置数据库的辅助日志文件的数目:
+db2 update db cfg for 数据库名称 using logsecond 5
+
+增大语句堆（sql长度）的大小：(IMMEDIATE表示不用重启数据库)
+db2 update db cfg for 数据库名 using STMTHEAP 40960 IMMEDIATE
+
+增大应用程序堆（内存）的大小：(IMMEDIATE表示不用重启数据库)
+db2 update db cfg for 数据库名 using APPLHEAPSZ 40960 IMMEDIATE
+
+增大程序包高速缓存大小：(IMMEDIATE表示不用重启数据库)
+db2 UPDATE DB CFG FOR 数据库名 USING PCKCACHESZ 40960 IMMEDIATE
+
+导出：db2move 数据库名称 export -u 用户名 -p 密码
+导入：db2move 数据库名称 import -u 用户名 -p 密码
+
+
+查看db2数据库版本
+db2licm -l
+
+C:\Program Files\IBM\gsk8\lib64

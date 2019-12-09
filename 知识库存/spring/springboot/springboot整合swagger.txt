@@ -1,0 +1,45 @@
+springboot整合swagger步骤：
+  1.pom文件中引入依赖，所需依赖如下所示：
+  <!-- swagger -->
+<dependency>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-swagger-ui</artifactId>
+    <version>2.7.0</version>
+</dependency>
+<dependency>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-swagger2</artifactId>
+    <version>2.7.0</version>
+</dependency>
+2.创建swagger配置类
+/**
+ * swagger配置类
+ */
+@SpringBootConfiguration
+@EnableSwagger2
+public class SwaggerConfig {
+
+  /**
+   * 创建Docket
+   *
+   * @return Docket
+   */
+  @Bean
+  public Docket createSwaggerDocket() {
+    return new Docket(DocumentationType.SWAGGER_2).apiInfo(buildApiInfo())
+            .select().apis(RequestHandlerSelectors.basePackage("com.hd123.bootdemo"))
+            .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
+            .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+            .paths(PathSelectors.any()).build();
+  }
+
+  /**
+   * 创建apiInfo
+   *
+   * @return apiInfo
+   */
+  private ApiInfo buildApiInfo() {
+    return new ApiInfoBuilder().title("springboot整合swagger").version("1.0").description("第一次整合swagger").build();
+  }
+}
+3.启动项目访问http://localhost:8080/swagger-ui.html

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+<bean id="datasources" class="com.cvicse.commons.datasource.config.DataSourcesConfig" >
+		<property name="dataSourcesConfig">
+			<map>
+				<entry key="jdbc.default">
+				
+						<bean class="com.cvicse.commons.datasource.jdbc.JDBCDataSourceConfig">
+						<property name="scope">
+							<value>ThreadLocal</value>
+						</property>
+						<property name="type">
+							<value>jdbc/directly</value>
+						</property>
+						<property name="dataSource">
+							<value>sdmsa</value>
+						</property>
+						<property name="driver">
+							<value>com.ibm.db2.jcc.DB2Driver</value>
+						</property>
+						<property name="url">
+						<!--this is test DB start 开发：CJLHCS 测试： YUFLCDB 现场 ： YUFLCCH -->
+						<!-- <value>jdbc:db2://192.168.102.37:50000/YUFLCCH</value> -->
+						<value>jdbc:db2://192.168.3.53:50000/YUFLC:currentSchema=DB2INST;</value>
+						</property>
+						<property name="user">
+							<!-- <value>db2inst</value> -->
+							<value>ngcms</value>
+						</property>
+						<property name="password">
+							<!-- <value>`123qwerasdf</value> -->
+							<value>353Jr@#%#</value>
+						</property>
+				
+					</bean>
+				
+				
+				</entry>
+				 
+				 <entry key="jdbc.lms">
+					<bean class="com.cvicse.commons.datasource.jdbc.JDBCDataSourceConfig">
+						<property name="scope">
+							<value>ThreadLocal</value>
+						</property>
+						<property name="type">
+							<value>jdbc/directly</value>
+						</property>
+						<property name="dataSource">
+							<value>jdbc/lms</value>
+						</property>
+						<property name="driver">
+							<value>com.ibm.db2.jcc.DB2Driver</value>
+						</property>
+						<property name="url"> 
+						
+						<value>jdbc:db2://128.1.12.159:50000/lms210</value>
+						</property>
+						<property name="user">
+							<value>lms</value>
+						</property>
+						<property name="password">
+							<value>lms</value>
+						</property>
+					</bean>
+				</entry>
+				 
+				<entry key="jdbc.keyGenerator">
+					<!-- ConditionKeyGenerator -->
+					<bean
+						class="com.cvicse.cmis.pm.config.RefJDBCDataSourceConfig">
+						<property name="ref" value="jdbc.default" />
+						<property name="selfManageTransaction"
+							value="true" />
+					</bean>
+				</entry>
+				</map>
+		</property>
+	</bean>
+</beans>

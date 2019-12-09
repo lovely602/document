@@ -1,0 +1,6 @@
+激活解决方案如下：
+1、激活license 放置DB2 安装目录
+	D:\program files\IBM\SQLLIB\BIN
+
+	使用命令导入license
+	Db2licm -a db2ese_c.lic

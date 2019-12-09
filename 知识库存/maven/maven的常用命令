@@ -1,0 +1,33 @@
+常用的maven命令
+mvn                   检查是否安装了maven
+mvn -v                查看maven的版本信息
+mvn -e                显示错误信息
+mvn archetype:create -DgroupId=packageName -DartifactId=projectName 创建maven的普通Java项目
+mvn archetype:create -DgroupId=packageName -DartifactId=projectName -DarchetypeArtifactId=maven-archetype-webapp  创建maven的web项目
+mvn archetype:generate 创建项目架构
+mvn eclipse:eclipse    生成eclipse项目
+mvn idea:idea          生成idea项目
+mvn validate           验证工程是否正确，所有需要的资源是否可用
+mvn verify             运行任何检查，验证包是否有效且达到质量标准
+mvn compile           编译Java源码
+mvn test-compile      编译测试代码
+mvn test              运行应用程序中的测试单元，并生成测试报告
+mvn package           打包，动态web工程打war包，Java工程打jar包
+mav install           将项目生成的jar包放到仓库中，以便变得模块调用
+mvn sit               生成项目相关信息的网站
+mvn clean             清空输出目录，默认输出目录为target
+mvn clean compile     将源码编译为class字节码文件
+mvn clean package     进行打包
+mvn clean test        执行单元测试
+mvn clean install     将这个项目打包。发布到本地仓库。
+mvn clean deploy      部署到版本仓库
+mvn dependency:list    查看已解析依赖
+mvn dependency:tree    查看依赖树
+mvn dependency:analyze 查看当前项目中未声明的依赖或以声明但未使用的依赖
+mvn help:system        从中央仓库下载文件到本地仓库，并打印出所有的Java系统属性和环境变量
+mvn help:active-profiles 查看当前的profiles
+mvn help:all-profiles    查看所有的Profiles
+mvn help：effective -pom 查看完整的pom信息
+echo %MAVEN_HOME%        查看maven的安装路径
+mvn jetty:run            运行项目于jetty上
+mvn install assembly:assembly   构建装配maven assembly插件是一个用来创建你应用程序特有分发包的插件

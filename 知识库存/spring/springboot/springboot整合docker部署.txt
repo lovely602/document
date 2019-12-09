@@ -1,0 +1,170 @@
+ docker
+ Docker是一种开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的Linux或者windows机器上，容器是完全使用沙箱机制，相互间没有接口。
+
+ DockerFile:
+ DockerFile由一行行命令语句组成，并且支持用“#”开头作为注释，一般的，DockerFile分为四个部分，基础镜像信息，维护者信息，镜像操作指令和容器启动时执行的指令。
+
+ DockerFile指令：
+ 1.FROM:指定基础镜像
+ 格式：FROM <image>  或者FROM <image>:<tag>
+ 第一条指令必须为FROM指令，功能为指定基础镜像，如果在同一个DockerFile中创建多个镜像时，可以使用多个FROM指令，每个镜像一次。
+ 例如：FROM harbor.qianfan123.com/base/hd_jre:8162-alpine_v2
+
+ 2.MAINTAINET：指定作者
+ 格式：MAINTAINET <name>
+ 指定维护者的信息
+
+ 3.RUN：运行指定的命令
+ 格式：RUN <command> 或 RUN ["","",""]
+ 构建容器时执行的指令，每条指令将在当前镜像的基础上执行，运行指定的命令，并提交为新的镜像。（可以用"\"换行）
+
+ 4.CMD：容器启动时要运行的命令
+ 格式： CMD ["","",""]
+ 指定容器启动时执行的命令，每个DockerFile只能有一条CMD指令，如果制定了多条指令，则最后一条执行。（会被启动时指定的命令覆盖）
+
+ 5.EXPOSE：暴露容器运行时监听的端口给外部
+ 格式：EXPOSE <port> [<port> ...]
+ 告诉Docker服务端暴露端口，在容器启动时需要通过 -p做端口映射
+
+ 6.ENV：指定环境变量
+ 格式：ENV <key>  <value>
+ 指定环境变量。会被RUN指令使用，并在容器运行时保存。
+
+ 7.ADD：一个复制命令，把文件复制到镜像中
+ 格式：ADD <src> <dest>
+ 复制指定的<src>到容器的<dest>中，<src>可以是DockerFile所在目录的一个相对路径；可以是URL，也可以是tar.gz（自动解压）
+
+8.COPY：复制命令，
+格式：COPY <src> <dest>
+复制本地主机的<src>(为DockerFile所在目录的相对路径)到容器中的<dest>.(当使用本地目录为源目录时，推荐使用COPY)
+
+9.ENTRYPOINT：启动时的默认命令
+格式：ENTRYPOINT ["","",""]
+配置容器启动后执行的命令，并且不可以被docker run 提供的参数覆盖。（每个DockerFile中只能有一个ENTRYPOINT，当指定多个时，只有最后一个起效)
+
+10.VOLUME：可实现挂载功能
+格式：VOLUME ["/mnt"]
+创建一个可以从本地主机或其他容器挂载的挂载点，一般用来存放数据库，和需要保持的数据等。
+
+11.USER：设置启动容器的用户
+格式：USER daemon
+指定运行容器时的用户名或UID，后续的RUN也会使用指定用户
+
+12.WORKDIR：设置工作目录
+格式：WORKDIR /path/to/workdir
+为后续的RUN，CMD，ENTRYPOINT,指令配置工作目录。（可以使用多个WORKDIR指令，后续命令如果参数是相对路径，则会基于之前的命令指定的路径）
+
+13.ONBUILD：只对当前镜像的子镜像有效
+格式：INBUILD [INSTRUCTION]
+配置当所创建的镜像作为其他新创建镜像的基础镜像时，所执行的指令命令。
+
+14.LABEL  :为镜像指定标签
+格式：LABEL <key>=<value>
+例如：LABEL PROJECT="sas-web-service" \
+      AUTHOR="zhuchao"          \
+      COMPANY="Shanghai HEADING Information Engineering Co., Ltd."
+
+15.ARG：设置变量命令
+格式：ARG <name>[=<default value>]
+ARG命令定义了一个变量，在docker build 创建镜像的过程中，使用 --build -arg <varname>=<value
+例如：FROM busybox
+      ARG buildno
+
+需设置的pom插件如下所示：
+
+<profiles>
+   <profile>
+      <id>docker</id>
+      <activation>
+        <property>
+          <name>docker</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <configuration>
+              <archiveClasses>true</archiveClasses>
+              <webResources>
+                <resource>
+                  <directory>src/main/resources</directory>
+                  <targetPath>WEB-INF/classes</targetPath>
+                  <includes>
+                    <include>*.properties</include>
+                    <include>*.xml</include>
+                  </includes>
+                  <excludes>
+                    <exclude>${project.artifactId}.properties</exclude>
+                  </excludes>
+                </resource>
+              </webResources>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>com.spotify</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>${docker-maven-plugin.version}</version>
+            <configuration>
+              <serverId>heading-harbor-dockerhub</serverId>
+              <registryUrl>https://${heading.docker.registry}</registryUrl>
+            </configuration>
+            <executions>
+              <execution>
+                <id>build-image</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>build</goal>
+                </goals>
+                <configuration>
+                  <dockerDirectory>${project.basedir}/src/main/docker
+                  </dockerDirectory>
+                  <imageName>
+                    ${heading.docker.registry}/dly_cmember/${project.artifactId}:${docker.tag}
+                  </imageName>
+                  <resources>
+                    <resource>
+                      <targetPath>/</targetPath>
+                      <directory>${project.build.directory}</directory>
+                      <include>*.war</include>
+                    </resource>
+                  </resources>
+                </configuration>
+              </execution>
+              <execution>
+                <id>push-image</id>
+                <phase>deploy</phase>
+                <goals>
+                  <goal>push</goal>
+                </goals>
+                <configuration>
+                  <imageName>
+                    ${heading.docker.registry}/dly_cmember/${project.artifactId}:${docker.tag}
+                  </imageName>
+                  <retryPushCount>3</retryPushCount>
+                  <retryPushTimeout>60</retryPushTimeout>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+</profiles>
+
+创建DockerFile文件
+# base image
+FROM harbor.qianfan123.com/base/hd_tomcat:7.0.56-jre780-alpine-prod-dly
+
+LABEL PROJECT="crm-web" \
+      AUTHOR="lishuaiqi" \
+      COMPANY="Shanghai HEADING Information Engineering Co., Ltd."
+
+WORKDIR /apache-tomcat/webapps
+
+ADD crm-web*.war crm-web.war
+
+EXPOSE 8080 9004
+
+ENTRYPOINT ../bin/catalina.sh run

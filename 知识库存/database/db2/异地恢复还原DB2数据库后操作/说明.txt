@@ -1,0 +1,26 @@
+在有些情况下，当前登录用户所要访问的Schema可能并不是默认分配给他的Schema，这时查询表前就需要一个前缀来约束所要访问的Schema。如：
+
+SELECT * FROM wanted_schema_name.table_name
+
+如果每次都这么做，那就相当麻烦，所以必须通过某些手段来修改当前的Schema/Sqlid。
+
+在修改前，先学习下如何通过命令行方式查看当前所使用的Schema/Sqlid
+
+   select current schema from sysibm.sysdummy1
+   select current schema from sysibm.dual
+   或
+   select current sqlid from sysibm.sysdummy1
+   select current sqlid from sysibm.dual
+   或
+   values current schema
+   values current sqlid
+
+通过下面的命令可以修改当前Schema/Sqlid
+
+   SET CURRENT SCHEMA = 'PAYROLL'
+   SET SCHEMA 'PAYROLL'
+   SET CURRENT SQLID 'PAYROLL'
+
+在开发过程中，可以通过修改连接字符串来修改默认连接的Schema/Sqlid，以JDBC为例(最后的分号一定不能省略)：
+
+jdbc:db2://database_server_uri:port/database_name:currentSchema=schema_name;
