@@ -8,7 +8,7 @@
  1.FROM:指定基础镜像
  格式：FROM <image>  或者FROM <image>:<tag>
  第一条指令必须为FROM指令，功能为指定基础镜像，如果在同一个DockerFile中创建多个镜像时，可以使用多个FROM指令，每个镜像一次。
- 例如：FROM harbor.qianfan123.com/base/hd_jre:8162-alpine_v2
+ 例如：FROM harbor.hfhgf.com/base/hd_jre:8162-alpine_v2
 
  2.MAINTAINET：指定作者
  格式：MAINTAINET <name>
@@ -155,7 +155,7 @@ ARG命令定义了一个变量，在docker build 创建镜像的过程中，使�
 
 创建DockerFile文件
 # base image
-FROM harbor.qianfan123.com/base/hd_tomcat:7.0.56-jre780-alpine-prod-dly
+FROM harbor.ghjgj.com/base/hd_tomcat:7.0.56-jre780-alpine-prod-dly
 
 LABEL PROJECT="crm-web" \
       AUTHOR="lishuaiqi" \

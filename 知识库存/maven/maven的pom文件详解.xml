@@ -19,7 +19,7 @@
   <!--声明项目遵守哪一个pom模型版本-->
   <modelVersion>4.0.0</modelVersion>
   <!--项目的全球唯一标识符-->
-  <groupId>com.hd123</groupId>
+  <groupId>com.fyfu</groupId>
   <!--构件的标识符，它和groupId一起唯一标识一个构件-->
   <artifactId>maven-demo</artifactId>
   <!--项目的当前版本-->
@@ -44,7 +44,7 @@
     <!--问题管理系统的名字-->
     <system>JIRA</system>
     <!--该项目使用的问题管理系统的URL-->
-    <url>http://hddenv:8080/jira/browse/MERCHANT</url>
+    <url></url>
   </issueManagement>
 
   <!--项目持续集成信息-->
@@ -85,15 +85,15 @@
     <!--该元素描述了项目相关的所有邮件列表。自动产生的网站引用这些信息-->
     <mailingList>
       <!--邮件的名称-->
-      <name>lizhixing626@163.com</name>
+      <name></name>
       <!--发送邮件的地址或链接，如果是邮件地址，创建文档时，mailto:链接会被自动创建-->
-      <post>https://mail.163.com</post>
+      <post></post>
       <!--订阅邮件的地址或链接，如果是邮件地址，创建文档时，mailto:链接会被自动创建-->
-      <subscribe>https://mail.163.com</subscribe>
+      <subscribe></subscribe>
       <!--取消订阅邮件的地址或链接，，如果是邮件地址，创建文档时，mailto:链接会被自动创建-->
-      <unsubscribe>https://mail.163.com</unsubscribe>
+      <unsubscribe></unsubscribe>
       <!--可以浏览邮件信息的url-->
-      <archive>https://mail.163.com</archive>
+      <archive></archive>
     </mailingList>
   </mailingLists>
 
@@ -108,16 +108,16 @@
       <!--项目开发者的邮件-->
       <email>lizhixing</email>
       <!--项目开发者的主页url-->
-      <url>http://mail.hd123.com</url>
+      <url></url>
       <!--项目开发者在项目中扮演的角色，角色元素描述了各种角色-->
       <roles>
         <role>dev</role>
         <role>test</role>
       </roles>
       <!--项目开发者的组织-->
-      <organization>Shanghai HEADING Information Engineering Co., Ltd</organization>
+      <organization></organization>
       <!--项目开发这的组织url-->
-      <organizationUrl>http://www.qianfan123.com</organizationUrl>
+      <organizationUrl></organizationUrl>
       <!--项目开发者属性，如即时消息如何处理等-->
       <properties>
         <dept>Customer</dept>
@@ -136,16 +136,16 @@
       <!--项目贡献者的邮件-->
       <email>lizhixing</email>
       <!--项目贡献者的主页url-->
-      <url>http://mail.hd123.com</url>
+      <url></url>
       <!--贡献者扮演的角色-->
       <roles>
         <role>dev</role>
         <role>test</role>
       </roles>
       <!--贡献者所在组织-->
-      <organization>Shanghai HEADING Information Engineering Co., Ltd</organization>
+      <organization></organization>
       <!--贡献者所在组织的主页url-->
-      <organizationUrl>http://www.qianfan123.com</organizationUrl>
+      <organizationUrl></organizationUrl>
       <!--项目贡献者的属性-->
       <properties>
         <dept>Customer</dept>
@@ -173,21 +173,21 @@
   <!--SCM(Source Control Management)标签允许你配置你的代码库，供maven，web站点和其他插件使用-->
   <scm>
     <!--scm的url，该url描述了版本库和如何连接到版本库，该连接只读-->
-    <connection>scm:git:http://github.app.hd123.cn:10080/service-center/sas-web.git</connection>
+    <connection></connection>
     <!--给开发者使用的，类似connection元素，即该连接不仅仅是只读-->
-    <developerConnection>scm:git:http://github.app.hd123.cn:10080/service-center/sas-web.git</developerConnection>
+    <developerConnection></developerConnection>
     <!--当前代码的标签，在开发阶段默认为head-->
     <tag>HEAD</tag>
     <!--指向项目可浏览scm库的URL-->
-    <url>http://github.app.hd123.cn:10080/service-center/sas-web.git</url>
+    <url></url>
   </scm>
 
   <!--描述项目所属组织的各种特性-->
   <organization>
     <!--组织的全名-->
-    <name>Shanghai HEADING Information Engineering Co., Ltd</name>
+    <name></name>
     <!--组织主页的url-->
-    <url>http://www.qianfan123.com</url>
+    <url></url>
   </organization>
 
   <!--构建项目需要的信息-->
@@ -211,7 +211,7 @@
       <!--描述使用到的构建扩展-->
       <extension>
         <!--构建扩展的groupId-->
-        <groupId>com.hd123</groupId>
+        <groupId></groupId>
         <!--构建扩展的artifactId-->
         <artifactId>maven-demo</artifactId>
         <!--构建扩展的版本-->
@@ -259,7 +259,7 @@
     </testResources>
     <!--当filtering开关打开时，使用过的过滤器属性文件列表-->
     <filters>
-      <filter>com.hd123.mavendemo.MavenDemoFilter</filter>
+      <filter></filter>
     </filters>
     <!--子项目可以引用的默认插件信息，引用时只需引入groupId以及artifactId即可，若额外配置则会覆盖这里的配置。该插件配置项直到被引用时才会被解析或绑定到生命周期-->
     <pluginManagement>

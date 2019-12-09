@@ -65,7 +65,7 @@ maven是个项目管理工具，如果我们不告诉它我们的代码要使用
         <manifest>
           <addClasspath>true</addClasspath>
           <classpathPrefix>lib/</classpathPrefix>
-          <mainClass>com.hd123.lizhixing.maven.HelloMaven</mainClass>
+          <mainClass>com.gjhgh.lizhixing.maven.HelloMaven</mainClass>
         </manifest>
       </archive>
     </configuration>
@@ -186,10 +186,10 @@ Release插件是Apache Maven团队提供的官方插件，
 ```
 <!--  使用maven-release-plugin的前置条件-->
 <scm>
-    <connection>scm:git:http://github.app.hd123.cn:10080/service-center/sas-web.git</connection>
-    <developerConnection>scm:git:http://github.app.hd123.cn:10080/service-center/sas-web.git</developerConnection>
-    <url>http://github.app.hd123.cn:10080/service-center/sas-web.git</url>
-    <tag>HEAD</tag>
+    <connection></connection>
+    <developerConnection></developerConnection>
+    <url></url>
+    <tag></tag>
 </scm>
 <plugin>
   <groupId>org.apache.maven.plugins</groupId>

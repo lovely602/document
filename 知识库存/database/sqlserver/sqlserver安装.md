@@ -27,16 +27,16 @@ SQL server configuration manager——》SQL server网络配置
 (local)        本地
 127.0.0.1      本地IP
 .              省略符
-LIZHIXING-PC   主机名
-127.17.5.233   主机IP
+gsrtwerg-PC   主机名
+127.0.0.1   主机IP
 ````            
 身份验证：在安装SQL Server的时候，若选择身份验证模式了在那里选择了"Windows混合身份验证模式"，这里就可以选择"Windows身份验证"，
-          否则的话在这里选择"SQL Server身份验证"，用户名填写"sa"，密码"hd123*pos"           
+          否则的话在这里选择"SQL Server身份验证"，用户名填写"sa"，密码"ghjg*pos"           
           
 若安装的SQL server服务的默认端口不是1433，使用navicat连接时需注意：
-Connect Name: 172.17.15.28
-Host: 172.17.15.28,1143          
-Initial Database: hbposev9
+Connect Name: 127.0.0.1
+Host: 127.0.0.1,1143          
+Initial Database: pos
 Authentication: SQL Server Authentication
 User Name: sa
 Password: sa

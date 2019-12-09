@@ -27,7 +27,7 @@ public class SwaggerConfig {
   @Bean
   public Docket createSwaggerDocket() {
     return new Docket(DocumentationType.SWAGGER_2).apiInfo(buildApiInfo())
-            .select().apis(RequestHandlerSelectors.basePackage("com.hd123.bootdemo"))
+            .select().apis(RequestHandlerSelectors.basePackage("com.gfhg.bootdemo"))
             .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
             .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
             .paths(PathSelectors.any()).build();

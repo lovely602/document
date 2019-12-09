@@ -19,7 +19,7 @@
   <!--声明项目遵守哪一个pom模型版本-->
   <modelVersion>4.0.0</modelVersion>
   <!--项目的全球唯一标识符-->
-  <groupId>com.hd123</groupId>
+  <groupId></groupId>
   <!--构件的标识符，它和groupId一起唯一标识一个构件-->
   <artifactId>maven-demo</artifactId>
   <!--项目的当前版本-->
@@ -29,7 +29,7 @@
   <!--项目的名称-->
   <name>maven-demo</name>
   <!--项目主页的URL，maven产生的文档用-->
-  <url>http://github.com/lizhixing/maven-demo.git</url>
+  <url></url>
   <!--项目的详细描述，maven产生的文档用-->
   <description>这是一个maven项目</description>
 
@@ -44,7 +44,7 @@
     <!--问题管理系统的名字-->
     <system>JIRA</system>
     <!--该项目使用的问题管理系统的URL-->
-    <url>http://hddenv:8080/jira/browse/MERCHANT</url>
+    <url></url>
   </issueManagement>
 
   <!--项目持续集成信息-->
@@ -85,15 +85,15 @@
     <!--该元素描述了项目相关的所有邮件列表。自动产生的网站引用这些信息-->
     <mailingList>
       <!--邮件的名称-->
-      <name>lizhixing626@163.com</name>
+      <name></name>
       <!--发送邮件的地址或链接，如果是邮件地址，创建文档时，mailto:链接会被自动创建-->
-      <post>https://mail.163.com</post>
+      <post></post>
       <!--订阅邮件的地址或链接，如果是邮件地址，创建文档时，mailto:链接会被自动创建-->
-      <subscribe>https://mail.163.com</subscribe>
+      <subscribe></subscribe>
       <!--取消订阅邮件的地址或链接，，如果是邮件地址，创建文档时，mailto:链接会被自动创建-->
-      <unsubscribe>https://mail.163.com</unsubscribe>
+      <unsubscribe></unsubscribe>
       <!--可以浏览邮件信息的url-->
-      <archive>https://mail.163.com</archive>
+      <archive></archive>
     </mailingList>
   </mailingLists>
 
@@ -102,22 +102,22 @@
     <!--某个项目开发者的信息-->
     <developer>
       <!--scm里项目开发者的唯一标识符-->
-      <id>lizhixing</id>
+      <id></id>
       <!--项目开发者的全名-->
-      <name>李志兴</name>
+      <name></name>
       <!--项目开发者的邮件-->
-      <email>lizhixing</email>
+      <email></email>
       <!--项目开发者的主页url-->
-      <url>http://mail.hd123.com</url>
+      <url></url>
       <!--项目开发者在项目中扮演的角色，角色元素描述了各种角色-->
       <roles>
         <role>dev</role>
         <role>test</role>
       </roles>
       <!--项目开发者的组织-->
-      <organization>Shanghai HEADING Information Engineering Co., Ltd</organization>
+      <organization></organization>
       <!--项目开发这的组织url-->
-      <organizationUrl>http://www.qianfan123.com</organizationUrl>
+      <organizationUrl></organizationUrl>
       <!--项目开发者属性，如即时消息如何处理等-->
       <properties>
         <dept>Customer</dept>
@@ -132,20 +132,20 @@
     <!--项目的其他贡献者-->
     <contributor>
       <!--项目贡献者的名称-->
-      <name>李志兴</name>
+      <name></name>
       <!--项目贡献者的邮件-->
-      <email>lizhixing</email>
+      <email></email>
       <!--项目贡献者的主页url-->
-      <url>http://mail.hd123.com</url>
+      <url></url>
       <!--贡献者扮演的角色-->
       <roles>
         <role>dev</role>
         <role>test</role>
       </roles>
       <!--贡献者所在组织-->
-      <organization>Shanghai HEADING Information Engineering Co., Ltd</organization>
+      <organization></organization>
       <!--贡献者所在组织的主页url-->
-      <organizationUrl>http://www.qianfan123.com</organizationUrl>
+      <organizationUrl></organizationUrl>
       <!--项目贡献者的属性-->
       <properties>
         <dept>Customer</dept>
@@ -162,7 +162,7 @@
       <!--license用于法律上的名称-->
       <name>maven</name>
       <!--官方license正文页面的url-->
-      <url>http://localhost:8080/maven-demo</url>
+      <url></url>
       <!--项目分发的主要方式，repo可以从maven库下载，manual。用户必须手动下载和安装依赖-->
       <distribution>m2repo</distribution>
       <!--有关license的补充信息-->
@@ -173,21 +173,21 @@
   <!--SCM(Source Control Management)标签允许你配置你的代码库，供maven，web站点和其他插件使用-->
   <scm>
     <!--scm的url，该url描述了版本库和如何连接到版本库，该连接只读-->
-    <connection>scm:git:http://github.app.hd123.cn:10080/service-center/sas-web.git</connection>
+    <connection></connection>
     <!--给开发者使用的，类似connection元素，即该连接不仅仅是只读-->
-    <developerConnection>scm:git:http://github.app.hd123.cn:10080/service-center/sas-web.git</developerConnection>
+    <developerConnection></developerConnection>
     <!--当前代码的标签，在开发阶段默认为head-->
     <tag>HEAD</tag>
     <!--指向项目可浏览scm库的URL-->
-    <url>http://github.app.hd123.cn:10080/service-center/sas-web.git</url>
+    <url></url>
   </scm>
 
   <!--描述项目所属组织的各种特性-->
   <organization>
     <!--组织的全名-->
-    <name>Shanghai HEADING Information Engineering Co., Ltd</name>
+    <name></name>
     <!--组织主页的url-->
-    <url>http://www.qianfan123.com</url>
+    <url></url>
   </organization>
 
   <!--构建项目需要的信息-->
@@ -211,7 +211,7 @@
       <!--描述使用到的构建扩展-->
       <extension>
         <!--构建扩展的groupId-->
-        <groupId>com.hd123</groupId>
+        <groupId></groupId>
         <!--构建扩展的artifactId-->
         <artifactId>maven-demo</artifactId>
         <!--构建扩展的版本-->
@@ -259,7 +259,7 @@
     </testResources>
     <!--当filtering开关打开时，使用过的过滤器属性文件列表-->
     <filters>
-      <filter>com.hd123.mavendemo.MavenDemoFilter</filter>
+      <filter></filter>
     </filters>
     <!--子项目可以引用的默认插件信息。该插件配置项直到被引用时才会被解析或绑定到生命周期，给定插件的任何本地配置都会覆盖这里的配置-->
     <pluginManagement>
@@ -457,7 +457,7 @@
       <!-- 远程仓库名称 -->
       <name>banseon-repository-proxy</name>
       <!-- 远程仓库URL，按protocol://hostname/path形式 -->
-      <url>http://192.168.1.169:9999/repository/</url>
+      <url></url>
       <!-- 用于定位和排序构件的仓库布局类型-可以是default（默认）或者legacy（遗留）。Maven 2为其仓库提供了一个默认
            的布局；然而，Maven 1.x有一种不同的布局。我们可以使用该元素指定布局是default（默认）还是legacy（遗留）。 -->
       <layout>default</layout>

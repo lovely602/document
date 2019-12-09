@@ -84,7 +84,7 @@ C:\Users\db2admin>db2 rollforward db LOCAL to end of logs
 DB20000I  ROLLFORWARD 命令成功完成。
 
 
-db2 => connect to LOCAL user db2inst using `123qwerasdf
+db2 => connect to LOCAL user db2inst using `jhgjgjk
 
    数据库连接信息
 
