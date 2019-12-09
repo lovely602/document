@@ -1,4 +1,4 @@
-国网国际导入数据库步骤：
+导入数据库步骤：
 1、删除用户
 drop user zmkgPro4 cascade;
 2、创建用户
@@ -10,7 +10,7 @@ imp zmkgPro4/zmkgPro4@192.168.102.9/orcl   file=d:\zmkgdmpCeshi20190110.dmp full
 
 imp zmkgPro4/zmkgPro4@192.168.102.9/orcl   file=d:\zmkgdmpCeshi20190110.dmp fromuser=(zmkgpro1) touser=(zmkgPro4) ignore=y;
 
-导入中煤科工数据库
+导入数据库
 imp zmkgPro4/zmkgPro4@192.168.102.9/orcl   file=d:\zmkgdmpCeshi20190110.dmp full=y ignore=y log=e:\111.log
 
 管理员账号：shdt1029
