@@ -1,9 +1,10 @@
 ## vue.js路由
-Vue.js 路由允许我们通过不同的 URL 访问不同的内容
+Vue Router 是 Vue.js 官方的路由管理器。它和 Vue.js 的核心深度集成，让构建单页面应用变得易如反掌。
+
+https://router.vuejs.org/zh/
 
 ### 安装
-1. https://unpkg.com/vue-router/dist/vue-router.js
-2. cnpm install vue-router
+ cnpm install vue-router
 
 ## router-link组件
 router-link 是一个组件，该组件用于设置一个导航链接，切换不同 HTML 内容。 to 属性为目标地址， 即要显示的内容
