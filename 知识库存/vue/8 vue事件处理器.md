@@ -45,10 +45,35 @@ var app = new Vue({
 app.greet() // -> 'Hello Vue.js!'
 </script>
 ````
+
+## 内联处理器中的方法
+除了直接绑定到一个方法，也可以在内联 JavaScript 语句中调用方法
+````
+<div id="example-3">
+  <button v-on:click="say('hi')">Say hi</button>
+  <button v-on:click="say('what')">Say what</button>
+</div>
+
+new Vue({
+  el: '#example-3',
+  methods: {
+    say: function (message) {
+      alert(message)
+    }
+  }
+})
+````
+
 ## 事件修饰符
 Vue.js 为 v-on 提供了事件修饰符来处理 DOM 事件细节，如：event.preventDefault() 或 event.stopPropagation()。
 
 Vue.js通过由点(.)表示的指令后缀来调用修饰符
+- .stop
+- .prevent
+- .capture
+- .self
+- .once
+- .passive
 
 ````
 <!-- 阻止单击事件冒泡 -->
@@ -82,6 +107,47 @@ Vue 允许为 v-on 在监听键盘事件时添加按键修饰符
 <input @keyup.enter="submit">
 ````
 全部的按键别名
-````
+- .enter
+- .tab
+- .delete (捕获“删除”和“退格”键)
+- .esc
+- .space
+- .up
+- .down
+- .left
+- .right
 
-````
+- .ctrl
+- .alt
+- .shift
+- .meta
+
+- .exact 
+
+## 在HTML中监听事件的优点
+
+- 扫一眼 HTML 模板便能轻松定位在 JavaScript 代码里对应的方法
+- 因为你无须在 JavaScript 里手动绑定事件，你的 ViewModel 代码可以是非常纯粹的逻辑，和 DOM 完全解耦，更易于测试
+- 当一个 ViewModel 被销毁时，所有的事件处理器都会自动被删除。你无须担心如何清理它们
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

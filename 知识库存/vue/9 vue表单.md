@@ -103,6 +103,31 @@ new Vue({
 })
 </script>
 ````
+## 值绑定
+对于单选按钮，复选框及选择框的选项，v-model 绑定的值通常是静态字符串 (对于复选框也可以是布尔值)：
+````
+<!-- 当选中时，`picked` 为字符串 "a" -->
+<input type="radio" v-model="picked" value="a">
+
+<!-- `toggle` 为 true 或 false -->
+<input type="checkbox" v-model="toggle">
+
+<!-- 当选中第一个选项时，`selected` 为字符串 "abc" -->
+<select v-model="selected">
+  <option value="abc">ABC</option>
+</select>
+````
+想把值绑定到 Vue 实例的一个动态属性上，这时可以用 v-bind 实现，并且这个属性的值可以不是字符串
+````
+<input type="radio" v-model="pick" v-bind:value="a">
+
+<select v-model="selected">
+    <!-- 内联对象字面量 -->
+  <option v-bind:value="{ number: 123 }">123</option>
+</select>
+````
+
+
 ## 修饰符
 
 ### .lazy
@@ -115,12 +140,12 @@ new Vue({
 ### .number
 如果想自动将用户的输入值转为 Number 类型（如果原值的转换结果为 NaN 则返回原值），可以添加一个修饰符 number 给 v-model 来处理输入值：
 
-这通常很有用，因为在 type="number" 时 HTML 中输入的值也总是会返回字符串类型
+这通常很有用，因为在 type="number" 时 HTML 中输入的值也总是会返回字符串类型。如果这个值无法被 parseFloat() 解析，则会返回原始的值
 ````
 <input v-model.number="age" type="number">
 ````
 ### .trim
-如果要自动过滤用户输入的首尾空格，可以添加 trim 修饰符到 v-model 上过滤输入
+如果要自动过滤用户输入的首尾空白字符，可以添加 trim 修饰符到 v-model 上过滤输入
 
 ````
 <input v-model.trim="msg">
