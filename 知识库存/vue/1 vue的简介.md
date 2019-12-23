@@ -83,9 +83,10 @@ document.write(vm.$el === document.getElementById('vue_det')) // true
 同时在这个过程中也会运行一些叫做生命周期钩子的函数，这给了用户在不同阶段添加自己的代码的机会
 
 - beforeCreate
+- data
 - created   
-- beforeMount
-- mounted
+- beforeMount 
+- mounted 
 - beforeUpdate
 - updated
 - beforeDestroy
