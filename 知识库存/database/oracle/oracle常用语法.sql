@@ -25,3 +25,30 @@ select * from user_col_comments
 select * from all_tab_columns
 --查询本用户的表的列名等信息。
 select * from user_tab_columns
+
+-- 创建触发器
+
+DECLARE v NUMBER;
+BEGIN
+SELECT count(1) INTO v FROM user_triggers WHERE TRIGGER_NAME = 'RASCNCTR_TGR_TPRCJJBJSKU';
+IF v > 0 THEN
+execute IMMEDIATE 'DROP TRIGGER RASCNCTR_TGR_TPRCJJBJSKU';
+END IF;
+END;
+go
+
+CREATE TRIGGER RASCNCTR_TGR_TPRCJJBJSKU
+AFTER INSERT OR UPDATE OR DELETE
+  ON TPRCJJBJSKU
+FOR each ROW
+    BEGIN
+    IF (inserting OR updating ) AND :NEW.POSCOMUPTYPE <> 2 THEN -- 记账生成调价商品信息
+    INSERT INTO "BAAS_TRANSFER_LOG" ("ACTION", "TABLENAME", "PK", "SHOP") VALUES ('I','PMS',:NEW.JJBJBILLNO,'');
+    ELSIF updating AND :NEW.POSCOMUPTYPE = 2  THEN -- 终止促销单
+    INSERT INTO "BAAS_TRANSFER_LOG" ("ACTION", "TABLENAME", "PK", "SHOP") VALUES ('D','PMS',:NEW.JJBJBILLNO,'');
+    ELSIF deleting THEN --deleting
+    INSERT INTO "BAAS_TRANSFER_LOG" ("ACTION", "TABLENAME", "PK", "SHOP") VALUES ('D','PMS',:OLD.JJBJBILLNO,'');
+    end IF;
+    END;
+go
+

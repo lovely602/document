@@ -29,3 +29,32 @@ select name from sysobjects where xtype='U'
 
 -- 查看数据库版本
 select @@version
+
+-- 创建触发器
+if exists(select * from dbo.sysobjects where id = object_id(N'[RASCNCTR_TGR_TBDEPTPROMPRICE]') and OBJECTPROPERTY(id, N'IsTrigger') = 1)
+  drop trigger RASCNCTR_TGR_TBDEPTPROMPRICE
+go
+
+CREATE TRIGGER [RASCNCTR_TGR_TBDEPTPROMPRICE]
+  ON [TBDEPTPROMPRICE]
+  AFTER INSERT , UPDATE , DELETE
+AS
+  if  exists(select 1 from inserted i where i.isStop = 0 )
+      and not exists(select 1 from deleted d where d.isStop = 0  )
+    BEGIN
+      INSERT INTO BAASCNCTR_LOG ( ACTION,  TABLENAME, PK)
+        select 'I_PROMPRICE',  'PMS', billNumber from inserted; -- 促销价格单
+    END
+if exists(select 1 from inserted i where i.isStop = 0 )
+   and exists(select 1 from deleted d where d.isStop = 0  )
+  BEGIN
+     INSERT INTO BAASCNCTR_LOG ( ACTION, TABLENAME, PK)
+    select 'U_PROMPRICE', 'PMS', billNumber from inserted;
+  END
+if  not exists(select 1 from inserted i where i.isStop = 0 )
+   and exists(select 1 from deleted d where d.isStop = 0  )
+  BEGIN
+    INSERT INTO BAASCNCTR_LOG ( ACTION, TABLENAME, PK)
+      select 'D_PROMPRICE',  'PMS',billNumber from deleted;
+  END
+go
