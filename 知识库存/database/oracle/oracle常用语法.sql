@@ -26,6 +26,9 @@ select * from all_tab_columns
 --查询本用户的表的列名等信息。
 select * from user_tab_columns
 
+-- 查询数据库版本信息
+select * from nls_database_parameters;
+
 -- 创建触发器
 
 DECLARE v NUMBER;
