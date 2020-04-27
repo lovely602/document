@@ -52,4 +52,6 @@ select to_char(sysdate,'mi')    as nowMinute from dual;   //获取时间的分
 select to_char(sysdate,'ss')    as nowSecond from dual;   //获取时间的秒
 
 select to_date('2004-05-07 13:23:44','yyyy-mm-dd hh24:mi:ss')    from dual//
+
+update tablename set DATEcolumn = to_date('2015-05-04 20:00:00','yyyy-mm-dd hh:mi:ss');
 ````

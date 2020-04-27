@@ -146,6 +146,7 @@ cnpm sync connect
 ````
 npm install module_name -S    即    npm install module_name --save    写入dependencies
 npm install module_name -D    即    npm install module_name --save-dev 写入devDependencies
+npm install module_name --no-save 临时安装不写入依赖列表
 npm install -g module_name  全局安装(命令行使用)
 npm install module_name 本地安装(将安装包放在 ./node_modules 下)
 ````

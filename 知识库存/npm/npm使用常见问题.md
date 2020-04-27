@@ -6,3 +6,9 @@
 
 ^3.3.4 := >=3.3.4 <4.0.0
 ````
+
+### 解决npm ERR! code ELIFECYCLE
+`````
+npm cache clean --force
+npm install
+`````
