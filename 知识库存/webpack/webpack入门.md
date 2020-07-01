@@ -1,8 +1,14 @@
 # webpack学习
 https://ke.qq.com/course/483060
+
+https://www.webpackjs.com/concepts/
+
+https://webpack.docschina.org/configuration/optimization/
 ## webpack是什么
-Webpack 是一个前端资源加载/打包工具。它将根据模块的依赖关系进行静态分析，然后将这些模块按照指定的规则生成对应的静态资源。
-Webpack 可以将多种静态资源 js、css、less 转换成一个静态文件，减少了页面的请求。
+webpack 是一个现代 JavaScript 应用程序的静态模块打包器(module bundler)。
+
+当 webpack 处理应用程序时，它会递归地构建一个依赖关系图(dependency graph)，
+其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 bundle
 
 ## webpack的安装
 在安装 Webpack 前，你本地环境需要支持 node.js
@@ -16,6 +22,3 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 cnpm install webpack -g
 cnpm install webpack-cli -g
 ````
-
-## LOADER
-Webpack 本身只能处理 JavaScript 模块，如果要处理其他类型的文件，就需要使用 loader 进行转换
