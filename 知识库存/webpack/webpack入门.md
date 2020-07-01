@@ -4,6 +4,8 @@ https://ke.qq.com/course/483060
 https://www.webpackjs.com/concepts/
 
 https://webpack.docschina.org/configuration/optimization/
+
+更多优化详情，请看官网
 ## webpack是什么
 webpack 是一个现代 JavaScript 应用程序的静态模块打包器(module bundler)。
 
@@ -22,3 +24,112 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 cnpm install webpack -g
 cnpm install webpack-cli -g
 ````
+
+### 四个核心概念
+
+- 入口(entry)
+- 输出(output)
+- loader
+- 插件(plugins)
+
+### 入口
+
+入口起点(entry point)指示 webpack 应该使用哪个模块，来作为构建其内部依赖图的开始。
+进入入口起点后，webpack 会找出有哪些模块和库是入口起点（直接和间接）依赖的
+
+````
+module.exports = {
+  entry: './path/to/my/entry/file.js'
+};
+````
+
+### 出口
+
+output 属性告诉 webpack 在哪里输出它所创建的 bundles，以及如何命名这些文件，默认值为 ./dist。
+基本上，整个应用程序结构，都会被编译到你指定的输出路径的文件夹中
+
+````
+const path = require('path');
+
+module.exports = {
+  entry: './path/to/my/entry/file.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'my-first-webpack.bundle.js'
+  }
+};
+````
+### loader
+
+
+loader 让 webpack 能够去处理那些非 JavaScript 文件（webpack 自身只理解 JavaScript）。
+loader 可以将所有类型的文件转换为 webpack 能够处理的有效模块，然后你就可以利用 webpack 的打包能力，对它们进行处理
+
+在 webpack 的配置中 loader 有两个目标
+
+- test 属性，用于标识出应该被对应的 loader 进行转换的某个或某些文件
+- use 属性，表示进行转换时，应该使用哪个 loader
+
+````
+const path = require('path');
+
+const config = {
+  output: {
+    filename: 'my-first-webpack.bundle.js'
+  },
+  module: {
+    rules: [
+      { test: /\.txt$/, use: 'raw-loader' }
+    ]
+  }
+};
+
+module.exports = config;
+````
+
+### 插件(plugins)
+
+插件则可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，一直到重新定义环境中的变量
+
+- 使用一个插件，需要 require() 它，然后把它添加到 plugins 数组中
+````
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // 通过 npm 安装
+const webpack = require('webpack'); // 用于访问内置插件
+
+const config = {
+  module: {
+    rules: [
+      { test: /\.txt$/, use: 'raw-loader' }
+    ]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({template: './src/index.html'})
+  ]
+};
+
+module.exports = config;
+````
+
+### 模式
+
+通过选择 development 或 production 之中的一个，来设置 mode 参数，你可以启用相应模式下的 webpack 内置的优化
+
+````
+module.exports = {
+  mode: 'production'
+};
+````
+
+
+
+
+
+
+
+
+
+
+
+
+
+
