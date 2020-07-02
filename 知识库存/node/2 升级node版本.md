@@ -14,8 +14,9 @@ npm install n -g
 或者：npm install -g n --force
  ````
  使用版本管理工具安装指定node或者升级到最新node版本
+ n不支持windows系统
  ````
-n stable  （安装node最新版本）
+n stable  （安装node最新版本）  
  ````
  ````
 n 8.9.4 （安装node指定版本8.9.4）
