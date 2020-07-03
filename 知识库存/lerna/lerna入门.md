@@ -1,8 +1,9 @@
 ### lerna
-
+官网
 https://lerna.js.org/
 
-https://www.bilibili.com/read/cv4948266?from=search
+有用博客
+http://www.manongjc.com/article/68827.html
 
 ### 使用介绍
 
@@ -53,3 +54,49 @@ lerna init //先采用默认模式，生成图lerna1目录结构
 
 ### 命令行
 - lerna publish 发布新的库版本
+- lerna version 这个命令 识别出修改的包 --> 创建新的版本号 --> 修改package.json --> 提交修改 打上版本的tag --> 推送到git上
+- lerna bootstrap 
+  - 为每个包安装依赖
+  - 链接相互依赖的库到具体的目录
+  - 执行 npm run prepublish
+  - 执行 npm run prepare
+````
+lerna bootstrap --npm-client=yarn
+````
+- lerna list 列举当前lerna 库包含的包
+- lerna changed 显示自上次relase tag以来有修改的包， 选项通 list
+- lerna diff 显示自上次relase tag以来有修改的包的差异， 执行 git diff
+- lerna exec 在每个包目录下执行任意命令
+````
+lerna exec -- <command> [..args] # runs the command in all packages
+lerna exec -- rm -rf ./node_modules
+lerna exec -- protractor conf.js
+lerna exec -- npm view \$LERNA_PACKAGE_NAME
+lerna exec -- node \$LERNA_ROOT_PATH/scripts/some-script.js
+````
+- lerna run 执行每个包package.json中的脚本命令
+````
+lerna run <script> -- [..args] # runs npm run my-script in all packages that have it
+lerna run test
+lerna run build
+
+watch all packages and transpile on change, streaming prefixed output
+lerna run --parallel watch
+````
+- lerna init 创建一个新的lerna库或者是更新lerna版本
+  - 修改package.json中lerna版本
+  - 创建lerna.json
+- lerna add 添加一个包的版本为各个包的依赖
+````
+lerna add <package>[@version] [--dev] [--exact]
+````
+- lerna clean 删除各个包下的node_modules
+- lerna import 导入指定git仓库的包作为lerna管理的包
+````
+lerna import <path-to-external-repository>
+````
+- lerna link 链接互相引用的库
+- lerna create 新建包
+````
+
+````
