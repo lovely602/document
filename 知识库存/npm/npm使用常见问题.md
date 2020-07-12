@@ -12,3 +12,7 @@
 npm cache clean --force
 npm install
 `````
+
+http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html
+
+https://www.jianshu.com/p/c96fdba92c44
