@@ -85,9 +85,30 @@ ref命令的最基本语法为ref="expression"。当视图是数据绑定的时�
 <span>Hello ${firstName}</span>
 ````
 
+## Contextual Properties
 
+绑定系统使多个属性可用于在模板中进行绑定，具体取决于上下文
 
+- $this -绑定上下文（视图模型）。
+- $parent-从组合或重复模板中明确访问外部作用域。当当前作用域上的属性掩盖外部作用域上的属性时，可能需要使用此属性。可链接-例如$parent.$parent.foo受支持。
+- $event -委托或触发器绑定中的DOM事件。
+- $index -在重复模板中，集合中项目的索引。
+- $first -在重复模板中，如果该项是数组中的第一项，则为true。
+- $last -在重复模板中，如果该项是数组中的最后一项，则为true。
+- $even -在重复模板中，如果项目的索引号为偶数，则为true。
+- $odd -在重复模板中，如果项目的索引为奇数，则为true
 
+## Expression Syntax
+
+- ＆号&代表一个BindingBehavior（而不是按位与）
+- 条形图|代表ValueConverter（而不是按位或）
+
+### 模板文字
+````
+`foo` - 相当于 'foo'
+
+`foo${bar}baz${qux}quux` - 相当于 'foo'+bar+'baz'+qux+'quux'
+````
 
 
 
