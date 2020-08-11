@@ -451,13 +451,89 @@ export class App {
 
 ### Layouts 版面
 
+在router-view自定义元素上指定布局，我们使用以下属性：
+- layout-view -指定要使用的布局视图的文件名（带有路径）
+- layout-view-model -指定要与布局视图一起使用的视图模型的moduleId
+- layout-model-指定要传递给布局视图模型activate功能的模型参数
 
+````
+<template>
+    <div>
+      <router-view layout-view="layout.html"></router-view>
+    </div>
+  </template>
+````
 
+### View Swapping and Animation 查看交换和动画
 
+当Aurelia路由器从一个视图导航到另一个视图时，我们将其称为“交换”一个视图到另一个视图。
+Aurelia为我们提供了一组可选策略，用于指示交换如何进行，或更具体地说，动画在交换期间如何播放
 
+通过将swap-order属性应用于router-view自定义HTML元素，可以将交换策略应用于一个或多个路由。
+然后，该策略将应用于在可以访问的两个视图之间的任何过渡中router-view
 
+- before 在移除当前视图之前为下一个视图设置动画
+- with 在移除当前视图的同时为下一个视图设置动画
+- after 在删除当前视图后为下一个视图设置动画（默认设置）
+````
+<template>
+    <div>
+      <router-view swap-order="before"></router-view>
+    </div>
+  </template>
+````
 
+### Internationalizing Titles 标题国际化
 
+### Configuring a Fallback Route 配置后备路由
+
+每当导航被拒绝时，它将被重定向到先前的位置。但是，在某些情况下，先前的位置不存在，例如，在应用程序启动后第一次导航时发生了。
+要处理这种情况，您可以设置一个后备路由
+
+````
+export class App {
+    configureRouter(config, router) {
+      this.router = router;
+      config.title = 'Aurelia';
+      config.map([
+        { route: ['', 'home'], name: 'home',  moduleId: 'home/index' },
+        { route: 'users',      name: 'users', moduleId: 'users/index', nav: true, title: 'Users' }
+      ]);
+  
+      config.fallbackRoute('users');
+    }
+  }
+````
+
+### Reusing an Existing View Model 重用现有的视图模型
+
+由于视图模型的导航生命周期只调用一次，你可能识别出用户从接通路线问题Product A来Product B（见下文）。
+要变通解决此问题determineActivationStrategy，请在您的视图模型中实现该方法，并向路由器返回有关您要发生的事情的提示。
+可用的返回值是replace和invoke-lifecycle。请记住，“生命周期”是指导航生命周期
+
+````
+//app.js
+  
+  export class App {
+    configureRouter(config) {
+      config.title = 'Aurelia';
+      config.map([
+        { route: 'product/a',    moduleId: 'product',     nav: true },
+        { route: 'product/b',    moduleId: 'product',     nav: true },
+      ]);
+    }
+  }
+  
+  //product.js
+  
+  import {activationStrategy} from 'aurelia-router';
+  
+  export class Product {
+    determineActivationStrategy() {
+      return activationStrategy.replace;
+    }
+  }
+````
 
 
 
