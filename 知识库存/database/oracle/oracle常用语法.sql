@@ -29,3 +29,7 @@ select * from user_tab_columns
 -- 查询数据库版本信息
 select * from nls_database_parameters;
 
+-- 查询数据库编码格式
+SELECT * FROM NLS_DATABASE_PARAMETERS;
+select userenv('language') from dual;
+
