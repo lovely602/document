@@ -1,16 +1,117 @@
-### flex 属性
-用于设置或检索弹性盒模型对象的子元素如何分配空间
+### flex布局 
+http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html
 
-flex 属性是 flex-grow、flex-shrink 和 flex-basis 属性的简写属性
-- 语法：flex: flex-grow flex-shrink flex-basis|auto|initial|inherit;
+## Flex 布局是什么
+Flex 是 Flexible Box 的缩写，意为"弹性布局"，用来为盒状模型提供最大的灵活性
 
-属性值
-+ flex-grow 一个数字，规定项目将相对于其他灵活的项目进行扩展的量
-+ flex-shrink 一个数字，规定项目将相对于其他灵活的项目进行收缩的量
-+ flex-basis 项目的长度。合法值："auto"、"inherit" 或一个后跟 "%"、"px"、"em" 或任何其他长度单位的数字
-+ auto 与 1 1 auto 相同
-+ none 与 0 0 auto 相同
-+ initial 设置该属性为它的默认值，即为 0 1 auto
+任何一个容器都可以指定为 Flex 布局
+````
+.box{
+  display: flex;
+}
+````
+行内元素也可以使用 Flex 布局
+````
+.box{
+  display: inline-flex;
+}
+````
+
+## 基本概念
+
+采用 Flex 布局的元素，称为 Flex 容器（flex container），简称"容器"。
+它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称"项目"
+
+容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。
+主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；交叉轴的开始位置叫做cross start，结束位置叫做cross end
+
+项目默认沿主轴排列。单个项目占据的主轴空间叫做main size，占据的交叉轴空间叫做cross size
+
+## 容器的属性
+
+### flex-direction属性
+
+flex-direction属性决定主轴的方向（即项目的排列方向）
+````
+.box {
+  flex-direction: row | row-reverse | column | column-reverse;
+}
+````
+- row（默认值）：主轴为水平方向，起点在左端。
+- row-reverse：主轴为水平方向，起点在右端。
+- column：主轴为垂直方向，起点在上沿。
+- column-reverse：主轴为垂直方向，起点在下沿。
+
+### flex-wrap属性
+
+默认情况下，项目都排在一条线（又称"轴线"）上。flex-wrap属性定义，如果一条轴线排不下，如何换行
+````
+.box{
+  flex-wrap: nowrap | wrap | wrap-reverse;
+}
+````
+- nowrap（默认）：不换行。
+- wrap：换行，第一行在上方
+- wrap-reverse：换行，第一行在下方
+
+### flex-flow
+flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap
+````
+.box {
+  flex-flow: <flex-direction> || <flex-wrap>;
+}
+````
+
+### justify-content
+
+justify-content属性定义了项目在主轴上的对齐方式
+````
+.box {
+  justify-content: flex-start | flex-end | center | space-between | space-around;
+}
+````
+
+- flex-start（默认值）：左对齐
+- flex-end：右对齐
+- center： 居中
+- space-between：两端对齐，项目之间的间隔都相等
+- space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍
+
+### align-items属性
+
+align-items属性定义项目在交叉轴上如何对齐
+````
+.box {
+  align-items: flex-start | flex-end | center | baseline | stretch;
+}
+````
+- flex-start：交叉轴的起点对齐
+- flex-end：交叉轴的终点对齐
+- center：交叉轴的中点对齐
+- baseline: 项目的第一行文字的基线对齐
+- stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度
+
+### align-content属性
+align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用
+````
+flex-start：与交叉轴的起点对齐
+flex-end：与交叉轴的终点对齐
+center：与交叉轴的中点对齐
+space-between：与交叉轴两端对齐，轴线之间的间隔平均分布
+space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍
+stretch（默认值）：轴线占满整个交叉轴
+````
+
+## 项目的属性
+
+### order属性
+
+order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0
+````
+.item {
+  order: <integer>;
+}
+````
 
 ### flex-grow 属性
 用于设置或检索弹性盒子的扩展比率
@@ -47,91 +148,19 @@ div:nth-of-type(3) {flex-grow: 1;}
 ````
 div:nth-of-type(2) {flex-basis: 80px;}
 ````
+### flex 属性
+用于设置或检索弹性盒模型对象的子元素如何分配空间
 
-### flex-flow 属性
-flex-flow 属性用于设置或检索弹性盒模型对象的子元素排列方式
-- flex-flow 属性是 flex-direction 和 flex-wrap 属性的复合属性
-- flex-direction 属性规定灵活项目的方向
-- flex-wrap 属性规定灵活项目是否拆行或拆列
-语法：flex-flow: flex-direction flex-wrap|initial|inherit;
-
-
-### flex-direction 属性
-规定灵活项目的方向
-flex-direction: row|row-reverse|column|column-reverse|initial|inherit;
-
-属性名
-- row 默认值。灵活的项目将水平显示，正如一个行一样
-- row-reverse 与 row 相同，但是以相反的顺序
-- column 灵活的项目将垂直显示，正如一个列一样
-- column-reverse 与 column 相同，但是以相反的顺序
-````
-div
-{
-display:flex;
-flex-direction:row-reverse;
-}
-````
-
-### flex-wrap 属性
-规定flex容器是单行或者多行，同时横轴的方向决定了新行堆叠的方向
-语法：flex-wrap: nowrap|wrap|wrap-reverse|initial|inherit;
+flex 属性是 flex-grow、flex-shrink 和 flex-basis 属性的简写属性
+- 语法：flex: flex-grow flex-shrink flex-basis|auto|initial|inherit;
 
 属性值
-- nowrap 默认值。规定灵活的项目不拆行或不拆列
-- wrap 规定灵活的项目在必要的时候拆行或拆列
-- wrap-reverse 规定灵活的项目在必要的时候拆行或拆列，但是以相反的顺序
-
-````
-div {
-display:flex;
-flex-wrap: wrap;
-}
-````
-
-### align-content 属性
-弹性容器内的各项没有占用交叉轴上所有可用的空间时对齐容器内的各项（垂直）
-
-注意：容器内必须有多行的项目，该属性才能渲染出效果
-
-语法：align-content: stretch|center|flex-start|flex-end|space-between|space-around|initial|inherit;
-
-属性值：
-- stretch 默认值。元素被拉伸以适应容器
-- center 元素位于容器的中心
-- flex-start 元素位于容器的开头
-- flex-end 元素位于容器的结尾
-- space-between 元素位于各行之间留有空白的容器内
-- space-around 元素位于各行之前、之间、之后都留有空白的容器内
-````
-div
-{
-    display: flex;
-    flex-flow: row wrap;
-    align-content:space-around;
-}
-````
-
-### align-items 属性
-定义flex子项在flex容器的当前行的侧轴（纵轴）方向上的对齐方式
-提示：使用每个弹性对象元素的 align-self 属性可重写 align-items 属性
-
-语法：align-items: stretch|center|flex-start|flex-end|baseline|initial|inherit;
-
-属性值
-
-- stretch 默认值。元素被拉伸以适应容器。
-- center 元素位于容器的中心
-- flex-start 元素位于容器的开头
-- flex-end 元素位于容器的结尾
-- baseline 元素位于容器的基线上
-````
-div
-{
-    display: flex;
-    align-items:center;
-}
-````
++ flex-grow 一个数字，规定项目将相对于其他灵活的项目进行扩展的量
++ flex-shrink 一个数字，规定项目将相对于其他灵活的项目进行收缩的量
++ flex-basis 项目的长度。合法值："auto"、"inherit" 或一个后跟 "%"、"px"、"em" 或任何其他长度单位的数字
++ auto 与 1 1 auto 相同
++ none 与 0 0 auto 相同
++ initial 设置该属性为它的默认值，即为 0 1 auto
 
 ### align-self 属性
 定义flex子项单独在侧轴（纵轴）方向上的对齐方式
@@ -145,25 +174,3 @@ div
 - flex-start 元素位于容器的开头
 - flex-end 元素位于容器的结尾
 - baseline 元素位于容器的基线上
-
-### justify-content 属性
-用于设置或检索弹性盒子元素在主轴（横轴）方向上的对齐方式
-
-语法：justify-content: flex-start|flex-end|center|space-between|space-around|initial|inherit;
-
-属性值
-- flex-start 默认值。项目位于容器的开头
-- flex-end 项目位于容器的结尾
-- center 项目位于容器的中心
-- space-between 项目位于各行之间留有空白的容器内
-- space-around 项目位于各行之前、之间、之后都留有空白的容器内
-
-### order 属性
-设置或检索弹性盒模型对象的子元素出现的順序
-语法：order: number|initial|inherit;
-````
-div#myRedDIV {order:2;}
-div#myBlueDIV {order:4;}
-div#myGreenDIV {order:3;}
-div#myPinkDIV {order:1;}
-````

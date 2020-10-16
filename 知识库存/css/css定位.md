@@ -222,7 +222,3 @@ transform:rotate(7deg);
 -o-transform:rotate(7deg); 	/* Opera */
 }
 ```
-### flex-shrink
-flex-shrink 属性指定了 flex 元素的收缩规则。
-flex 元素仅在默认宽度之和大于容器的时候才会发生收缩，其收缩的大小是依据 flex-shrink 的值。
-注意：如果元素不是弹性盒对象的元素，则 flex-shrink 属性不起作用。
