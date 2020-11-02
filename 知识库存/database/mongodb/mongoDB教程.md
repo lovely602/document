@@ -10,9 +10,19 @@ MongoDB 将数据存储为一个文档，数据结构由键值(key=>value)对组
 
 ![avatar](./mongoDB.png 'nihao')
 
-````
-<img src="./mongoDB.png"></img>
-````
+## MongoDB 概念解析
+
+|SQL术语概念|MongoDB术语概念|解释说明|
+|---|---|---|
+|database|database|数据库|
+|table|collection|数据库表/集合|
+|row|document|数据记录行/文档|
+|column|field|数据字段/域|
+|index|index|索引|
+|table joins||表连接,MongoDB不支持|
+|primary key|primary key|主键,MongoDB自动将_id字段设置为主键|
+
+
 
 
 
