@@ -1,0 +1,503 @@
+= mongoDB教程
+
+https://www.runoob.com/mongodb/mongodb-tutorial.html[教程网址]
+
+- <<什么是MongoDB>>
+- <<MongoDB概念解析>>
+- <<windows平台安装mongoDB>>
+- <<创建数据库>>
+- <<mongoDB删除数据库>>
+- <<mongoDB创建集合>>
+- <<mongoDB删除集合>>
+
+== 什么是MongoDB
+
+MongoDB 是由C++语言编写的，是一个基于分布式文件存储的开源数据库系统。
+
+在高负载的情况下，添加更多的节点，可以保证服务器性能。
+
+MongoDB 旨在为WEB应用提供可扩展的高性能数据存储解决方案。
+
+MongoDB 将数据存储为一个文档，数据结构由键值(key=>value)对组成。MongoDB 文档类似于 JSON 对象。字段值可以包含其他文档，数组及文档数组。
+
+![avatar](./mongoDB.png 'nihao')
+
+== MongoDB概念解析
+
+.mongoDB概念解析
+|===
+|SQL术语概念|MongoDB术语概念|解释说明
+|database|database|数据库
+|table|collection|数据库表/集合
+|row|document|数据记录行/文档
+|column|field|数据字段/域
+|index|index|索引
+|table joins||表连接,MongoDB不支持
+|primary key|primary key|主键,MongoDB自动将_id字段设置为主键
+|===
+
+== windows平台安装mongoDB
+
+* 管理员模式打开命令行窗口
+* 创建配置文件 mongod.cfg
+  - 指定 systemLog.path 和 storage.dbPath
+....
+systemLog:
+    destination: file
+    path: D:\mongoDB\server\3.4\data\log\mongod.log
+storage:
+    dbPath: D:\mongoDB\server\3.4\data\db
+....
+* 安装 MongoDB服务
+....
+mongod --config "D:\mongoDB\server\3.4\mongod.cfg" --install
+
+mongod --auth --config "D:\mongoDB\server\3.4\mongod.cfg" --install
+....
+* 启动mongoDB 服务
+....
+net start MongoDB
+....
+* 关闭MongoDB服务
+....
+net stop MongoDB
+....
+* 移除 MongoDB 服务
+....
+mongod --remove
+....
+
+== mongoDB 创建账号
+
+https://blog.csdn.net/weixin_44679078/article/details/105543895[添加用户教程]
+
+1. 以系统管理员的方式运行powershell
+2. 连接数据库 mongo
+3. 查看数据库 show dbs
+4. 切换到admin数据库 use admin
+5. 创建超级管理员账号
+6. 切换到blog数据 use blog
+7. 创建普通账号 db.createUser()
+8. 登录账号 db.auth()
+....
+// 创建超级管理员账号  root
+db.createUser({user: 'root',pwd: '123456', roles: ['root']})
+// 创建普通账号 readWrite
+db.createUser({user: 'sa',pwd: '123456', roles: ['readWrite']})
+// 登录账号
+db.auth('sa','123456')
+// 连接mongodb
+mongo --port 27017 -u "root" -p "123456" --authenticationDatabase "admin"
+....
+
+== mongoDB连接
+
+标准URI连接语法
+....
+mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
+....
+- mongodb:// 这是固定的格式，必须要指定。
+- username:password@ 可选项，如果设置，在连接数据库服务器之后，驱动都会尝试登录这个数据库
+- host1 必须的指定至少一个host, host1 是这个URI唯一要填写的。它指定了要连接服务器的地址。如果要连接复制集，请指定多个主机地址
+- portX 可选的指定端口，如果不填，默认为27017
+- /database 如果指定username:password@，连接并验证登录指定数据库。若不指定，默认打开 test 数据库
+- ?options 是连接选项。如果不使用/database，则前面需要加上/。所有连接选项都是键值对name=value，键值对之间通过&或;（分号）隔开
+
+== 创建数据库
+
+....
+// 创建数据库
+use DATABASE_NAME
+
+// 查看所有数据库
+show dbs
+....
+MongoDB 中默认的数据库为 test，如果你没有创建新的数据库，集合将存放在 test 数据库中
+
+== mongoDB删除数据库
+
+....
+// 删除数据库
+db.dropDatabase()
+
+// 删除集合
+db.collection.drop()
+....
+
+== mongoDB创建集合
+
+db.createCollection(name, options)
+
+参数说明
+- name: 要创建的集合名称
+- options: 可选参数, 指定有关内存大小及索引的选项
+
+.参数说明
+|===
+|字段|类型|描述
+|capped|布尔|（可选）如果为 true，则创建固定集合。固定集合是指有着固定大小的集合，当达到最大值时，它会自动覆盖最早的文档。
+当该值为 true 时，必须指定 size 参数
+|size|数值|（可选）为固定集合指定一个最大值，即字节数。
+如果 capped 为 true，也需要指定该字段
+|max|数值|（可选）指定固定集合中包含文档的最大数量
+|===
+....
+db.createCollection("place")
+show collections
+show tables
+....
+
+
+== mongoDB删除集合
+
+db.collection.drop()
+
+== mongoDB插入文档
+
+db.COLLECTION_NAME.insert(document)
+db.COLLECTION_NAME.save(document)
+db.collection.insertMany()
+
+- save()：如果 _id 主键存在则更新数据，如果不存在就插入数据。该方法新版本中已废弃，可以使用 db.collection.insertOne() 或 db.collection.replaceOne() 来代替
+- insert(): 若插入的数据主键已经存在，则会抛 org.springframework.dao.DuplicateKeyException 异常，提示主键重复，不保存当前数据
+
+....
+db.content_place.insert({"name": "张三"}))
+....
+
+== mongoDB更新文档
+
+MongoDB 使用 update() 和 save() 方法来更新集合中的文档。接下来让我们详细来看下两个函数的应用及其区别
+
+* update() 方法
+
+db.collection.update(
+<query>,
+<update>,
+{
+upsert: <boolean>,
+multi: <boolean>,
+writeConcern: <document>
+}
+)
+
+参数说明：
+* query : update的查询条件，类似sql update查询内where后面的
+* update : update的对象和一些更新的操作符（如$,$inc...）等，也可以理解为sql update查询内set后面的
+* upsert : 可选，这个参数的意思是，如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入
+* multi : 可选，mongodb 默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新
+* writeConcern :可选，抛出异常的级别
+
+....
+db.col.insert({
+    title: 'MongoDB 教程',
+    description: 'MongoDB 是一个 Nosql 数据库',
+    by: '菜鸟教程',
+    url: 'http://www.runoob.com',
+    tags: ['mongodb', 'database', 'NoSQL'],
+    likes: 100
+})
+
+db.col.update({'title':'MongoDB 教程'},{$set:{'title':'MongoDB'}})
+....
+
+* save() 方法
+
+save() 方法通过传入的文档来替换已有文档，_id 主键存在就更新，不存在就插入。语法格式如下：
+....
+db.collection.save(
+   <document>,
+   {
+     writeConcern: <document>
+   }
+)
+....
+
+参数说明：
+
+- document : 文档数据。
+- writeConcern :可选，抛出异常的级别。
+
+
+== mongoDB删除文档
+
+MongoDB remove()函数是用来移除集合中的数据。
+
+....
+db.collection.remove(
+   <query>,
+   <justOne>
+)
+....
+
+参数说明：
+
+- query :（可选）删除的文档的条件。
+- justOne : （可选）如果设为 true 或 1，则只删除一个文档，如果不设置该参数，或使用默认值 false，则删除所有匹配条件的文档。
+- writeConcern :（可选）抛出异常的级别。
+
+== mongoDB查询文档
+
+MongoDB 查询文档使用 find() 方法
+
+....
+db.collection.find(query, projection)
+db.collection.find(query, projection).pretty()  格式化查询结果
+....
+
+- query ：可选，使用查询操作符指定查询条件
+- projection ：可选，使用投影操作符指定返回的键。查询时返回文档中所有键值， 只需省略该参数即可（默认省略）
+
+.MongoDB与RDBMS Where 语句比较
+|===
+|操作|格式|范例|RDBMS中的类似语句
+|等于|{<key>:<value>}|db.col.find({"by":"菜鸟教程"}).pretty()|here by = '菜鸟教程'
+|小于|{<key>:{$lt:<value>}}|db.col.find({"likes":{$lt:50}}).pretty()|where likes < 50
+|小于或等于|{<key>:{$lte:<value>}}|db.col.find({"likes":{$lte:50}}).pretty()|where likes <= 50
+|大于|{<key>:{$gt:<value>}}|db.col.find({"likes":{$gt:50}}).pretty()|where likes > 50
+|大于或等于|{<key>:{$gte:<value>}}|db.col.find({"likes":{$gte:50}}).pretty()|where likes >= 50
+|不等于|{<key>:{$ne:<value>}}|db.col.find({"likes":{$ne:50}}).pretty()|where likes != 50
+|===
+
+=== MongoDB AND 条件
+
+db.collection.find({key1:value1, key2:value2}).pretty()
+
+=== MongoDB OR 条件
+
+db.collection.find(
+{
+$or: [
+{key1: value1}, {key2:value2}
+      ]
+}
+).pretty()
+
+=== MongoDB 查询分析
+
+MongoDB 查询分析可以确保我们所建立的索引是否有效，是查询语句性能分析的重要工具。
+
+MongoDB 查询分析常用函数有：explain() 和 hint()。
+
+- 使用 explain()
+....
+db.users.find({gender:"M"},{user_name:1,_id:0}).explain()
+
+{
+   "cursor" : "BtreeCursor gender_1_user_name_1",
+   "isMultiKey" : false,
+   "n" : 1,
+   "nscannedObjects" : 0,
+   "nscanned" : 1,
+   "nscannedObjectsAllPlans" : 0,
+   "nscannedAllPlans" : 1,
+   "scanAndOrder" : false,
+   "indexOnly" : true,
+   "nYields" : 0,
+   "nChunkSkips" : 0,
+   "millis" : 0,
+   "indexBounds" : {
+      "gender" : [
+         [
+            "M",
+            "M"
+         ]
+      ],
+      "user_name" : [
+         [
+            {
+               "$minElement" : 1
+            },
+            {
+               "$maxElement" : 1
+            }
+         ]
+      ]
+   }
+}
+
+indexOnly: 字段为 true ，表示我们使用了索引。
+cursor：因为这个查询使用了索引，MongoDB 中索引存储在B树结构中，所以这是也使用了 BtreeCursor 类型的游标。如果没有使用索引，游标的类型是 BasicCursor。这个键还会给出你所使用的索引的名称，你通过这个名称可以查看当前数据库下的system.indexes集合（系统自动创建，由于存储索引信息，这个稍微会提到）来得到索引的详细信息。
+n：当前查询返回的文档数量。
+nscanned/nscannedObjects：表明当前这次查询一共扫描了集合中多少个文档，我们的目的是，让这个数值和返回文档的数量越接近越好。
+millis：当前查询所需时间，毫秒数。
+indexBounds：当前查询具体使用的索引
+....
+- 使用 hint()
+
+使用 hint 来强制 MongoDB 使用一个指定的索引
+....
+指定了使用 gender 和 user_name 索引字段来查询
+db.users.find({gender:"M"},{user_name:1,_id:0}).hint({gender:1,user_name:1})
+....
+
+== MongoDB $type 操作符
+
+$type操作符是基于BSON类型来检索集合中匹配的数据类型，并返回结果
+|===
+|类型|数字|备注
+|Double|1|
+|String|2|
+|Object|3|
+|Array|4|
+|Binary data|5|
+|Undefined|6|
+|Object id|7|
+|Boolean|8|
+|Date|9|
+|Null|10|
+|===
+
+....
+db.col.find({"title" : {$type : 2}})
+或
+db.col.find({"title" : {$type : 'string'}})
+....
+
+== MongoDB Limit与Skip方法
+
+- MongoDB Limit() 方法
+
+db.COLLECTION_NAME.find().limit(NUMBER)
+
+- MongoDB Skip() 方法
+
+db.COLLECTION_NAME.find().limit(NUMBER).skip(NUMBER)
+
+注:skip()方法默认参数为 0
+
+== MongoDB 排序
+
+在 MongoDB 中使用 sort() 方法对数据进行排序，sort() 方法可以通过参数指定排序的字段，并使用 1 和 -1 来指定排序的方式，其中 1 为升序排列，而 -1 是用于降序排列
+
+....
+db.COLLECTION_NAME.find().sort({KEY:1})
+....
+
+== MongoDB 索引
+
+索引通常能够极大的提高查询的效率，如果没有索引，MongoDB在读取数据时必须扫描集合中的每个文件并选取那些符合查询条件的记录。
+
+这种扫描全集合的查询效率是非常低的，特别在处理大量的数据时，查询可以要花费几十秒甚至几分钟，这对网站的性能是非常致命的。
+
+索引是特殊的数据结构，索引存储在一个易于遍历读取的数据集合中，索引是对数据库表中一列或多列的值进行排序的一种结构
+
+* createIndex() 方法
+
+db.collection.createIndex(keys, options)
+
+.可选参数列表如下
+|===
+|Parameter|Type|Description
+|background|Boolean|建索引过程会阻塞其它数据库操作，background可指定以后台方式创建索引，即增加 "background" 可选参数。 "background" 默认值为false
+|unique|Boolean|建立的索引是否唯一。指定为true创建唯一索引。默认值为false
+|name|string|索引的名称。如果未指定，MongoDB的通过连接索引的字段名和排序顺序生成一个索引名称
+|sparse|Boolean|对文档中不存在的字段数据不启用索引；这个参数需要特别注意，如果设置为true的话，在索引字段中不会查询出不包含对应字段的文档.。默认值为 false
+|===
+....
+db.values.createIndex({open: 1, close: 1}, {background: true})
+....
+
+== mongo高级索引
+
+....
+{
+   "address": {
+      "city": "Los Angeles",
+      "state": "California",
+      "pincode": "123"
+   },
+   "tags": [
+      "music",
+      "cricket",
+      "blogs"
+   ],
+   "name": "Tom Benzamin"
+}
+....
+
+- 索引数组字段
+  - db.users.ensureIndex({"tags":1})
+- 索引子文档字段
+  - db.users.ensureIndex({"address.city":1,"address.state":1,"address.pincode":1})
+
+== mongoDb的索引限制
+
+- 由于索引是存储在内存(RAM)中,你应该确保该索引的大小不超过内存的限制
+- 索引不能被以下的查询使用
+  - 正则表达式及非操作符，如 $nin, $not, 等
+  - 算术运算符，如 $mod, 等
+  - $where 子句
+
+== MongoDB 聚合
+
+MongoDB 中聚合(aggregate)主要用于处理数据(诸如统计平均值，求和等)，并返回计算后的数据结果
+
+db.COLLECTION_NAME.aggregate(AGGREGATE_OPERATION)
+
+.集合表达式
+|===
+|表达式|描述|实例
+|$sum|计算总和|db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$sum : "$likes"}}}])
+|$avg|计算平均值|db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$avg : "$likes"}}}])
+|$min|获取集合中所有文档对应值得最小值|db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$min : "$likes"}}}])
+|$max|获取集合中所有文档对应值得最大值|db.mycol.aggregate([{$group : {_id : "$by_user", num_tutorial : {$max : "$likes"}}}])
+|$push|在结果文档中插入值到一个数组中|db.mycol.aggregate([{$group : {_id : "$by_user", url : {$push: "$url"}}}])
+|$addToSet|在结果文档中插入值到一个数组中，但不创建副本|db.mycol.aggregate([{$group : {_id : "$by_user", url : {$addToSet : "$url"}}}])
+|$first|根据资源文档的排序获取第一个文档数据|db.mycol.aggregate([{$group : {_id : "$by_user", first_url : {$first : "$url"}}}])
+|$last|根据资源文档的排序获取最后一个文档数据|db.mycol.aggregate([{$group : {_id : "$by_user", last_url : {$last : "$url"}}}])
+|===
+
+注意：by_user,likes是字段名
+
+=== 管道的概念
+
+MongoDB的聚合管道将MongoDB文档在一个管道处理完毕后将结果传递给下一个管道处理。管道操作是可以重复的。
+
+表达式：处理输入文档并输出。表达式是无状态的，只能用于计算当前聚合管道的文档，不能处理其它的文档
+
+- $project：修改输入文档的结构。可以用来重命名、增加或删除域，也可以用于创建计算结果以及嵌套文档。
+- $match：用于过滤数据，只输出符合条件的文档。$match使用MongoDB的标准查询操作。
+- $limit：用来限制MongoDB聚合管道返回的文档数。
+- $skip：在聚合管道中跳过指定数量的文档，并返回余下的文档。
+- $unwind：将文档中的某一个数组类型字段拆分成多条，每条包含数组中的一个值。
+- $group：将集合中的文档分组，可用于统计结果。
+- $sort：将输入文档排序后输出。
+- $geoNear：输出接近某一地理位置的有序文档
+
+
+== MongoDB ObjectId
+
+ObjectId 是一个12字节 BSON 类型数据，有以下格式
+
+- 前4个字节表示时间戳
+- 接下来的3个字节是机器标识码
+- 紧接的两个字节由进程id组成（PID
+- 最后三个字节是随机数
+
+1. 创建新的ObjectId  newObjectId = ObjectId()
+2. 创建文档的时间戳  ObjectId("5349b4ddd2781d08c09890f4").getTimestamp()
+3. ObjectId 转换为字符串 new ObjectId().str
+
+== MongoDB正则表达式
+
+正则表达式是使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。
+
+MongoDB 使用 $regex 操作符来设置匹配字符串的正则表达式。
+
+* 使用正则表达式
+
+db.posts.find({post_text:{$regex:"runoob"}}) // 使用正则表达式查找包含 runoob 字符串的文章
+
+* 不区分大小写的正则表达式
+
+如果检索需要不区分大小写，我们可以设置 $options 为 $i
+
+db.posts.find({post_text:{$regex:"runoob",$options:"$i"}})
+
+
+
+
+
+
+
