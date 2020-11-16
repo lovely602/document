@@ -18,3 +18,7 @@
 ````
 -javaagent:D:\DevelopTools\IntelliJ IDEA 2018.3.4\bin\JetbrainsIdesCrack-4.2-release-enc.jar
 ````  
+
+### idea快捷生成serialVersionUID
+
+https://jingyan.baidu.com/article/f79b7cb3d19cc49144023ea6.html
