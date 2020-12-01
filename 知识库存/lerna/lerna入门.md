@@ -5,6 +5,12 @@ https://lerna.js.org/
 有用博客
 http://www.manongjc.com/article/68827.html
 
+learn的基础使用
+https://www.wandouip.com/t5i126916/
+
+基于Lerna管理packages的Monorepo项目最佳实践
+https://github.com/morrain/lerna-learning/
+
 ### 使用介绍
 
 - 全局安装lerna
