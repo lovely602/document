@@ -29,5 +29,8 @@ select name from sysobjects where xtype='U'
 
 -- 查看数据库版本
 select @@version
+-- object_id 函数
+--语法：object_id('objectname')或object('objectname','type')
+--作用：该函数会返回指定对象的ID值，可以在sysobjects表中进行验证
 
 
