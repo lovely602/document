@@ -14,10 +14,16 @@
 4. 快速修复
   Show Intention Actions   设置 Ctrl + 1
   
-## idea快捷激活
-````
--javaagent:D:\DevelopTools\IntelliJ IDEA 2018.3.4\bin\JetbrainsIdesCrack-4.2-release-enc.jar
-````  
+### idea小插件
+
+Lombok
+Maven Helper
+SVN Helper
+SVN Disconnect
+Eclipse Code Formatter
+Alibaba Java Coding GuideLines
+Asciidoc
+.ignore
 
 ### idea快捷生成serialVersionUID
 
