@@ -8,7 +8,7 @@
 1. 退回上一次编辑的地方
   Back  设置 Ctrl + CapsLock 快捷键
 2. 代码提示
-  Basic 设置 Alt + /
+  Basic 设置 Alt + /+
 3. 重命名
   Rename 设置 F2
 4. 快速修复
