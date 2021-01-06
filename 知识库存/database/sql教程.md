@@ -10,6 +10,9 @@ SQL 是用于访问和处理数据库的标准的计算机语言
 - set names utf8; 命令用于设置使用的字符集。
 - SELECT * FROM Websites; 读取数据表的信息
 
+### 添加一列
+alter table TABLE_NAME add column NEW_COLUMN_NAME varchar(255) not null  comment '备注';
+
 ### select 语句
 ````
 SELECT column_name,column_name FROM table_name;
