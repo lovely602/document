@@ -18,12 +18,13 @@
 
 Lombok
 Maven Helper
-SVN Helper
 SVN Disconnect
 Eclipse Code Formatter
 Alibaba Java Coding GuideLines
 Asciidoc
 .ignore
+spotBugs
+translation
 
 ### idea快捷生成serialVersionUID
 
