@@ -24,6 +24,9 @@ Asciidoc
 .ignore
 spotBugs
 translation
+VisualVM Launcher   查看jvm
+GenerateAllSetter   自动插入一个对象的set方法
+Alibaba Java Coding Guidelines  阿里巴巴开发规约
 PlantUML integration
 PlantUML Diagrams generate
 
